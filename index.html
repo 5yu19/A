@@ -421,6 +421,7 @@
             } else {
                 img.setAttribute('src', originalSrc);
                 toastText = '기억 목록에서 삭제!';
+                if (season) memoryCounts[season]--;
             }
 
             // --- 토스트 메시지 관련 로직 ---
