@@ -375,8 +375,11 @@
                 }
                 
                 const frontImg = receipt.querySelector('img[alt="Receipt Front"]');
-                if (frontImg && frontImg.getAttribute('src').includes('1.jpeg')) {
-                    frontImg.setAttribute('src', frontImg.getAttribute('src').replace('1.jpeg', '.png'));
+                if (frontImg && frontImg.hasAttribute('data-original-src')) {
+                    const originalSrc = frontImg.getAttribute('data-original-src');
+                    if (frontImg.getAttribute('src') !== originalSrc) {
+                        frontImg.setAttribute('src', originalSrc);
+                    }
                 }
             });
             
