@@ -4,12 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Intangible Store</title>
-    <!-- Tailwind CSS 로드 -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- 구글 폰트 (픽셀 폰트) 로드 -->
     <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* 네오둥근모 (한글 픽셀 폰트) 로드 */
         @font-face {
             font-family: 'NeoDunggeunmo';
             src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.3/NeoDunggeunmo.woff') format('woff');
@@ -27,7 +24,6 @@
         .font-pixel {
             font-family: 'Silkscreen', 'NeoDunggeunmo', cursive;
         }
-        /* 배경 질감 효과 */
         .grain-bg {
             position: fixed;
             inset: 0;
@@ -37,7 +33,6 @@
             z-index: 0;
         }
         
-        /* 3D 영수증 뒤집기 효과를 위한 커스텀 클래스 */
         .perspective { perspective: 1000px; }
         .transform-style-3d { transform-style: preserve-3d; }
         .backface-hidden { backface-visibility: hidden; }
@@ -45,7 +40,6 @@
         .flip-card-inner { transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
         .flipped .flip-card-inner { transform: rotateY(180deg); }
 
-        /* 영수증 상하 지그재그 효과 */
         .receipt-zigzag {
             -webkit-mask: 
                 conic-gradient(from -45deg at bottom, transparent, #000 1deg 89deg, transparent 90deg) 0 100% / 12px 6px repeat-x,
@@ -57,19 +51,16 @@
                 linear-gradient(#000 0 0) 0 6px / 100% calc(100% - 12px) no-repeat;
         }
 
-        /* 동그란 사진 부분만 마스킹 (글자 완벽 보호) */
         .circle-mask {
             -webkit-mask-image: radial-gradient(circle closest-side at 50% 50%, black 92%, transparent 100%);
             mask-image: radial-gradient(circle closest-side at 50% 50%, black 92%, transparent 100%);
         }
 
-        /* 컨테이너의 마우스 위치 변수 */
         .distort-container {
             --mouse-x: 50%;
             --mouse-y: 50%;
         }
 
-        /* 돋보기(볼록 렌즈) 래퍼 - 마우스 주변만 보이게 마스킹 */
         .lens-wrapper {
             opacity: 0;
             -webkit-mask-image: radial-gradient(circle 120px at var(--mouse-x) var(--mouse-y), black 60%, transparent 100%);
@@ -80,16 +71,14 @@
             opacity: 1;
         }
 
-        /* 실제 확대되는 렌즈 이미지 - 마우스 중심에서 확대 */
         .lens-image {
             transform-origin: var(--mouse-x) var(--mouse-y);
-            transform: scale(1.35); /* 볼록하게 커지는 비율 */
+            transform: scale(1.35);
         }
     </style>
 </head>
 <body>
 
-    <!-- 배경 노이즈 SVG -->
     <div class="grain-bg">
         <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
             <filter id="noise">
@@ -99,13 +88,11 @@
         </svg>
     </div>
 
-    <!-- 헤더 영역 -->
     <header id="mainHeader" class="fixed top-0 left-0 w-full p-8 lg:p-12 pl-12 lg:pl-20 flex justify-between items-center z-50">
         <div class="flex items-center gap-12">
             <div class="text-[11px] lg:text-[14px] tracking-[0.25em] font-bold uppercase opacity-80">
                 Intangible Store
             </div>
-            <!-- 새로고침 화살표 단일 아이콘 버튼 -->
             <button onclick="resetStore()" class="flex items-center justify-center p-1 hover:opacity-50 active:scale-95 transition-all" title="위치 초기화">
                 <svg class="w-3.5 h-3.5 lg:w-4 lg:h-4" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
@@ -113,7 +100,6 @@
                 </svg>
             </button>
 
-            <!-- 계절별 기억 목록(하트) 카운터 -->
             <div class="flex items-center gap-4 lg:gap-6 text-[10px] lg:text-[12px] font-pixel font-bold pt-1">
                 <div class="flex items-center gap-1.5" title="Spring"><span class="text-pink-300 text-sm">♥</span><span id="count-spring">+0</span></div>
                 <div class="flex items-center gap-1.5" title="Summer"><span class="text-emerald-300 text-sm">♥</span><span id="count-summer">+0</span></div>
@@ -122,7 +108,6 @@
             </div>
         </div>
 
-        <!-- 필터 내비게이션 -->
         <nav class="flex items-center gap-6">
             <div class="flex bg-black/5 p-1 rounded-full backdrop-blur-sm">
                 <button onclick="filterSeason('all', this)" class="filter-btn px-5 py-1.5 lg:px-8 lg:py-2.5 text-[10px] lg:text-[12px] uppercase font-bold tracking-widest bg-black text-white rounded-full shadow-lg transition-colors">All</button>
@@ -134,13 +119,11 @@
         </nav>
     </header>
 
-    <!-- 스토어 영역 -->
     <main id="storeView" class="relative min-h-screen flex flex-col justify-start pb-32 lg:pb-48">
-        <div class="relative z-50 max-w-fit pl-12 lg:pl-20 pt-28 lg:pt-40 pointer-events-none">
+        <div class="relative z-50 max-w-fit pl-12 lg:pl-20 pt-20 lg:pt-28 pointer-events-none">
             <h1 class="font-pixel text-[40px] lg:text-[70px] xl:text-[90px] leading-none tracking-[-0.05em] text-black/80 mb-2 lg:mb-4 select-none">
                 memories
             </h1>
-            <!-- 픽셀 폰트 'm'의 시각적 시작점에 맞춰 왼쪽으로 살짝 여백 추가 -->
             <div class="flex items-center gap-3 ml-1 lg:ml-2 xl:ml-3">
                 <span class="text-[8px] lg:text-[15px] tracking-[0.4em] text-black/50 uppercase font-bold">
                     8 Sensations
@@ -151,10 +134,8 @@
             </div>
         </div>
 
-        <!-- 무작위로 흩뿌려진 영수증 8개 -->
         <div class="relative z-40 w-full max-w-[1600px] 2xl:max-w-[2000px] mx-auto grid grid-cols-2 lg:grid-cols-4 place-items-center gap-x-6 lg:gap-x-12 2xl:gap-x-20 gap-y-16 lg:gap-y-28 px-8 lg:px-16 mt-16 lg:mt-32">
             
-        <!-- 1. 봄 영수증 1 (꽃) -->
     <div class="draggable-wrapper relative cursor-grab active:cursor-grabbing z-10 transition-all duration-500" data-season="spring" style="left: 0; top: 0;">
         <div class="perspective w-40 md:w-56 xl:w-64 2xl:w-72 aspect-[461/880] translate-y-4 lg:translate-y-8 rotate-2 hover:scale-105 transition-transform duration-300 group drop-shadow-md">
             <div class="flip-card-inner transform-style-3d relative w-full h-full pointer-events-none">
@@ -162,8 +143,7 @@
                     <div class="relative w-full h-full bg-white receipt-zigzag">
                         <img src="hi/ff.jpeg" alt="Receipt Front" draggable="false" class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 transition-all pointer-events-auto">
                                 <div onclick="addMemory(event, '#fdf2f3', this, 'hi/ff.jpeg', 'hi/ff1.jpeg')" class="absolute bottom-[2%] left-[5%] w-[25%] h-[12%] z-20 cursor-pointer pointer-events-auto"></div>
-                                <!-- BUY NOW 클릭 영역 (Blooming Excitement) -->
-                                <div onclick='showReceipt(event, "BLOOMING EXCITEMENT", "spring", "soft and pink", "a longing for spring")' class="absolute bottom-[2%] right-[5%] w-[60%] h-[12%] z-20 cursor-pointer pointer-events-auto"></div>
+                                <div onclick='showReceipt(event, "Blooming Excitement", "spring", "a longing for spring")' class="absolute bottom-[2%] right-[5%] w-[60%] h-[12%] z-20 cursor-pointer pointer-events-auto"></div>
                     </div>
                 </div>
                 <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#fdf2f3] p-2 rotate-y-180">
@@ -180,7 +160,6 @@
         </div>
     </div>
 
-    <!-- 2. 겨울 영수증 2 (눈) -->
     <div class="draggable-wrapper relative cursor-grab active:cursor-grabbing z-10 transition-all duration-500" data-season="winter" style="left: 0; top: 0;">
         <div class="perspective w-40 md:w-56 xl:w-64 2xl:w-72 aspect-[461/880] -translate-y-6 lg:-translate-y-12 -rotate-3 hover:scale-105 transition-transform duration-300 group drop-shadow-md">
             <div class="flip-card-inner transform-style-3d relative w-full h-full pointer-events-none">
@@ -188,8 +167,7 @@
                     <div class="relative w-full h-full bg-white receipt-zigzag">
                         <img src="hi/sf.jpeg" alt="Receipt Front" draggable="false" class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 transition-all pointer-events-auto">
                                 <div onclick="addMemory(event, '#d9ecfb', this, 'hi/sf.jpeg', 'hi/sf1.jpeg')" class="absolute bottom-[2%] left-[5%] w-[25%] h-[12%] z-20 cursor-pointer pointer-events-auto"></div>
-                                <!-- BUY NOW 클릭 영역 (Snowman's Smile) -->
-                                <div onclick='showReceipt(event, "SNOWMAN&#39;S SMILE", "winter", "cold yet joyful", "Red-tipped Nose")' class="absolute bottom-[2%] right-[5%] w-[60%] h-[12%] z-20 cursor-pointer pointer-events-auto"></div>
+                                <div onclick='showReceipt(event, "Snowman&#39;s Smile", "winter", "Red-tipped Nose")' class="absolute bottom-[2%] right-[5%] w-[60%] h-[12%] z-20 cursor-pointer pointer-events-auto"></div>
                     </div>
                 </div>
                 <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#d9ecfb] p-2 rotate-y-180">
@@ -206,7 +184,6 @@
         </div>
     </div>
 
-    <!-- 3. 여름 영수증 1 (수박) -->
     <div class="draggable-wrapper relative cursor-grab active:cursor-grabbing z-10 transition-all duration-500" data-season="summer" style="left: 0; top: 0;">
         <div class="perspective w-40 md:w-56 xl:w-64 2xl:w-72 aspect-[461/880] translate-y-12 lg:translate-y-20 rotate-1 hover:scale-105 transition-transform duration-300 group drop-shadow-md">
             <div class="flip-card-inner transform-style-3d relative w-full h-full pointer-events-none">
@@ -214,8 +191,7 @@
                     <div class="relative w-full h-full bg-white receipt-zigzag">
                         <img src="hi/wf.jpeg" alt="Receipt Front" draggable="false" class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 transition-all pointer-events-auto">
                                 <div onclick="addMemory(event, '#d8f0e0', this, 'hi/wf.jpeg', 'hi/wf1.jpeg')" class="absolute bottom-[2%] left-[5%] w-[25%] h-[12%] z-20 cursor-pointer pointer-events-auto"></div>
-                                <!-- BUY NOW 클릭 영역 (A Slice of Summer) -->
-                                <div onclick='showReceipt(event, "A SLICE OF SUMMER", "summer", "hot and sweet", "a body softened in the sun")' class="absolute bottom-[2%] right-[5%] w-[60%] h-[12%] z-20 cursor-pointer pointer-events-auto"></div>
+                                <div onclick='showReceipt(event, "A Slice of Summer", "summer", "a body softened in the sun")' class="absolute bottom-[2%] right-[5%] w-[60%] h-[12%] z-20 cursor-pointer pointer-events-auto"></div>
                     </div>
                 </div>
                 <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#d8f0e0] p-2 rotate-y-180">
@@ -232,7 +208,6 @@
         </div>
     </div>
 
-    <!-- 4. 가을 영수증 2 (버스) -->
     <div class="draggable-wrapper relative cursor-grab active:cursor-grabbing z-10 transition-all duration-500" data-season="autumn" style="left: 0; top: 0;">
         <div class="perspective w-40 md:w-56 xl:w-64 2xl:w-72 aspect-[461/880] translate-y-2 lg:translate-y-4 -rotate-2 hover:scale-105 transition-transform duration-300 group drop-shadow-md">
             <div class="flip-card-inner transform-style-3d relative w-full h-full pointer-events-none">
@@ -240,8 +215,7 @@
                     <div class="relative w-full h-full bg-white receipt-zigzag">
                         <img src="hi/bf.jpeg" alt="Receipt Front" draggable="false" class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 transition-all pointer-events-auto">
                                 <div onclick="addMemory(event, '#FFEFD5', this, 'hi/bf.jpeg', 'hi/bf1.jpeg')" class="absolute bottom-[2%] left-[5%] w-[25%] h-[12%] z-20 cursor-pointer pointer-events-auto"></div>
-                                <!-- BUY NOW 클릭 영역 (Golden Trail) -->
-                                <div onclick='showReceipt(event, "GOLDEN TRAIL", "Autumn", "clear and refreshing", "thoughts scattered in the wind")' class="absolute bottom-[2%] right-[5%] w-[60%] h-[12%] z-20 cursor-pointer pointer-events-auto"></div>
+                                <div onclick='showReceipt(event, "Golden Trail", "Autumn", "thoughts scattered in the wind")' class="absolute bottom-[2%] right-[5%] w-[60%] h-[12%] z-20 cursor-pointer pointer-events-auto"></div>
                     </div>
                 </div>
                 <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#FFEFD5] p-2 rotate-y-180">
@@ -258,7 +232,6 @@
         </div>
     </div>
 
-    <!-- 5. 겨울 영수증 1 (크리스마스) -->
     <div class="draggable-wrapper relative cursor-grab active:cursor-grabbing z-10 transition-all duration-500" data-season="winter" style="left: 0; top: 0;">
         <div class="perspective w-40 md:w-56 xl:w-64 2xl:w-72 aspect-[461/880] -translate-y-8 lg:-translate-y-16 rotate-3 hover:scale-105 transition-transform duration-300 group drop-shadow-md">
             <div class="flip-card-inner transform-style-3d relative w-full h-full pointer-events-none">
@@ -266,8 +239,7 @@
                     <div class="relative w-full h-full bg-white receipt-zigzag">
                         <img src="hi/cf.jpeg" alt="Receipt Front" draggable="false" class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 transition-all pointer-events-auto">
                                 <div onclick="addMemory(event, '#d9ecfb', this, 'hi/cf.jpeg', 'hi/cf1.jpeg')" class="absolute bottom-[2%] left-[5%] w-[25%] h-[12%] z-20 cursor-pointer pointer-events-auto"></div>
-                                <!-- BUY NOW 클릭 영역 (The Eve of a Miracle) -->
-                                <div onclick='showReceipt(event, "THE EVE OF A MIRACLE", "winter", "fluttering and sparkling", "a sincere wish")' class="absolute bottom-[2%] right-[5%] w-[60%] h-[12%] z-20 cursor-pointer pointer-events-auto"></div>
+                                <div onclick='showReceipt(event, "The Eve of a Miracle", "winter", "a sincere wish")' class="absolute bottom-[2%] right-[5%] w-[60%] h-[12%] z-20 cursor-pointer pointer-events-auto"></div>
                     </div>
                 </div>
                 <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#d9ecfb] p-2 rotate-y-180">
@@ -284,7 +256,6 @@
         </div>
     </div>
 
-    <!-- 6. 여름 영수증 2 (우산) -->
     <div class="draggable-wrapper relative cursor-grab active:cursor-grabbing z-10 transition-all duration-500" data-season="summer" style="left: 0; top: 0;">
         <div class="perspective w-40 md:w-56 xl:w-64 2xl:w-72 aspect-[461/880] -translate-y-12 lg:-translate-y-20 -rotate-1 hover:scale-105 transition-transform duration-300 group drop-shadow-md">
             <div class="flip-card-inner transform-style-3d relative w-full h-full pointer-events-none">
@@ -292,13 +263,11 @@
                     <div class="relative w-full h-full bg-white receipt-zigzag">
                         <img src="hi/uf.jpeg" alt="Receipt Front" draggable="false" class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 transition-all pointer-events-auto">
                                 <div onclick="addMemory(event, '#d8f0e0', this, 'hi/uf.jpeg', 'hi/uf1.jpeg')" class="absolute bottom-[2%] left-[5%] w-[25%] h-[12%] z-20 cursor-pointer pointer-events-auto"></div>
-                                <!-- BUY NOW 클릭 영역 (Humidity of the Rainy Season) -->
-                                <div onclick='showReceipt(event, "HUMIDITY OF THE RAINY SEASON", "summer", "damp and humid", "첨벙거리며 웃던 시간")' class="absolute bottom-[2%] right-[5%] w-[60%] h-[12%] z-20 cursor-pointer pointer-events-auto"></div>
+                                <div onclick='showReceipt(event, "Humidity of the Rainy Season", "summer", "The moment of splashing in the water")' class="absolute bottom-[2%] right-[5%] w-[60%] h-[12%] z-20 cursor-pointer pointer-events-auto"></div>
                     </div>
                 </div>
                 <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#d8f0e0] p-2 rotate-y-180">
                     <div class="relative w-full h-full bg-white receipt-zigzag distort-container overflow-hidden pointer-events-auto">
-                        <!-- 장-뒤 는 rb.jpeg로 매칭됨 -->
                         <img src="hi/rb.jpeg" alt="Receipt Back Base" draggable="false" class="absolute inset-0 w-full h-full object-cover pointer-events-none">
                         <div class="absolute inset-0 w-full h-full pointer-events-none circle-mask">
                             <div class="w-full h-full pointer-events-none lens-wrapper">
@@ -311,7 +280,6 @@
         </div>
     </div>
 
-    <!-- 7. 가을 영수증 1 (낙엽) -->
     <div class="draggable-wrapper relative cursor-grab active:cursor-grabbing z-10 transition-all duration-500" data-season="autumn" style="left: 0; top: 0;">
         <div class="perspective w-40 md:w-56 xl:w-64 2xl:w-72 aspect-[461/880] -translate-y-2 lg:-translate-y-6 rotate-2 hover:scale-105 transition-transform duration-300 group drop-shadow-md">
             <div class="flip-card-inner transform-style-3d relative w-full h-full pointer-events-none">
@@ -319,8 +287,7 @@
                     <div class="relative w-full h-full bg-white receipt-zigzag">
                         <img src="hi/lf.jpeg" alt="Receipt Front" draggable="false" class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 transition-all pointer-events-auto">
                                 <div onclick="addMemory(event, '#FFEFD5', this, 'hi/lf.jpeg', 'hi/lf1.jpeg')" class="absolute bottom-[2%] left-[5%] w-[25%] h-[12%] z-20 cursor-pointer pointer-events-auto"></div>
-                                <!-- BUY NOW 클릭 영역 (Lingering Autumn) -->
-                                <div onclick='showReceipt(event, "LINGERING AUTUMN", "Autumn", "crisp and light", "바스락거리는 기억")' class="absolute bottom-[2%] right-[5%] w-[60%] h-[12%] z-20 cursor-pointer pointer-events-auto"></div>
+                                <div onclick='showReceipt(event, "Lingering Autumn", "Autumn", "Whispering, rustling memories")' class="absolute bottom-[2%] right-[5%] w-[60%] h-[12%] z-20 cursor-pointer pointer-events-auto"></div>
                     </div>
                 </div>
                 <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#FFEFD5] p-2 rotate-y-180">
@@ -337,7 +304,6 @@
         </div>
     </div>
 
-    <!-- 8. 봄 영수증 2 (놀이공원) -->
     <div class="draggable-wrapper relative cursor-grab active:cursor-grabbing z-10 transition-all duration-500" data-season="spring" style="left: 0; top: 0;">
         <div class="perspective w-40 md:w-56 xl:w-64 2xl:w-72 aspect-[461/880] translate-y-8 lg:translate-y-16 -rotate-3 hover:scale-105 transition-transform duration-300 group drop-shadow-md">
             <div class="flip-card-inner transform-style-3d relative w-full h-full pointer-events-none">
@@ -345,8 +311,7 @@
                     <div class="relative w-full h-full bg-white receipt-zigzag">
                         <img src="hi/af.jpeg" alt="Receipt Front" draggable="false" class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 transition-all pointer-events-auto">
                                 <div onclick="addMemory(event, '#fdf2f3', this, 'hi/af.jpeg', 'hi/af1.jpeg')" class="absolute bottom-[2%] left-[5%] w-[25%] h-[12%] z-20 cursor-pointer pointer-events-auto"></div>
-                                <!-- BUY NOW 클릭 영역 (Spring Amusement Park) -->
-                                <div onclick='showReceipt(event, "SPRING AMUSEMENT PARK", "spring", "light and blooming", "innocence of childhood")' class="absolute bottom-[2%] right-[5%] w-[60%] h-[12%] z-20 cursor-pointer pointer-events-auto"></div>
+                                <div onclick='showReceipt(event, "Spring Amusement Park", "spring", "innocence of childhood")' class="absolute bottom-[2%] right-[5%] w-[60%] h-[12%] z-20 cursor-pointer pointer-events-auto"></div>
                     </div>
                 </div>
                 <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#fdf2f3] p-2 rotate-y-180">
@@ -364,27 +329,34 @@
         </div>
     </main>
 
-    <!-- 영수증 모달 팝업 -->
     <div id="receiptModal" class="fixed inset-0 z-[200] hidden items-center justify-center bg-black/40 backdrop-blur-sm opacity-0 transition-opacity duration-300 pointer-events-auto" onclick="closeReceipt()">
         <div id="receiptContent" class="receipt-zigzag bg-[#fcfaf2] py-12 px-8 md:px-10 max-w-sm w-[85%] text-black flex flex-col items-center transform scale-95 transition-transform duration-300 shadow-2xl relative" onclick="event.stopPropagation()">
-            <h2 id="receiptTitle" class="font-pixel text-lg md:text-xl font-bold mb-6 text-center uppercase tracking-widest leading-snug">BLOOMING EXCITEMENT</h2>
+            <h2 id="receiptTitle" class="font-pixel text-[16px] md:text-[20px] font-bold mb-6 text-center capitalize tracking-widest leading-snug opacity-90">Blooming Excitement</h2>
             <div class="w-full border-t-2 border-dashed border-black/30 mb-5"></div>
-            <div class="w-full text-[10px] md:text-xs space-y-3 font-bold flex flex-col items-start leading-relaxed uppercase tracking-[0.15em] opacity-80">
-                <div>Brand: intangible store</div>
-                <div id="receiptTheme">Theme: spring</div>
-                <div id="receiptFeeling">Feeling: soft and pink</div>
-                <div id="receiptPrice">Price: a longing for spring</div>
+            <div class="w-full space-y-1.5 font-bold flex flex-col items-start leading-relaxed opacity-80">
+                <div class="flex items-baseline gap-2">
+                    <span class="uppercase text-[12px] md:text-[14px] tracking-[0.25em]">BRAND:</span>
+                    <span class="capitalize text-[10px] md:text-[11px] tracking-[0.25em]">Intangible Store</span>
+                </div>
+                <div class="flex items-baseline gap-2">
+                    <span class="uppercase text-[12px] md:text-[14px] tracking-[0.25em]">THEME:</span>
+                    <span id="receiptThemeVal" class="capitalize text-[10px] md:text-[11px] tracking-[0.25em]">Spring</span>
+                </div>
+                <div class="flex items-baseline gap-2">
+                    <span class="uppercase text-[12px] md:text-[14px] tracking-[0.25em]">PRICE:</span>
+                    <span id="receiptPriceVal" class="capitalize text-[10px] md:text-[11px] tracking-[0.25em]">A Longing For Spring</span>
+                </div>
             </div>
             <div class="w-full border-t-2 border-dashed border-black/30 mt-5 mb-6"></div>
-            <div class="text-center font-pixel font-bold text-[10px] md:text-xs leading-loose">
-                이미 여러분의 추억으로 결제되었습니다-!
+            <div class="text-center font-pixel font-bold text-[10px] md:text-[12px] leading-normal text-black/80">
+                무형의 상점은 흐릿해져가는<br>추억과 감정들을 일깨워주는 상점입니다.<br><br>
+                이곳의 모든 상품은 이미 여러분의 추억으로<br>결제되어 있습니다!
             </div>
-            <button onclick="closeReceipt()" class="font-pixel mt-8 px-6 py-2 border-2 border-black text-black text-[10px] font-bold uppercase tracking-widest hover:bg-black hover:text-white transition-colors">Close</button>
+            <button onclick="closeReceipt()" class="font-pixel mt-8 px-6 py-2 border border-dashed border-black text-black text-[10px] font-bold uppercase tracking-widest hover:bg-black hover:text-white transition-colors">Close</button>
         </div>
     </div>
 
     <script>
-        // 계절별 하트(기억 목록) 카운트 변수
         const memoryCounts = {
             spring: 0,
             summer: 0,
@@ -392,9 +364,7 @@
             winter: 0
         };
 
-        // 스토어 화면 초기화 함수 (하트 카운터 유지)
         function resetStore() {
-            // 1. 드래그된 영수증 위치 초기화 및 뒤집힌 카드 원상복구
             const receipts = document.querySelectorAll('.draggable-wrapper');
             receipts.forEach(receipt => {
                 receipt.style.left = '0px';
@@ -403,27 +373,27 @@
                 if (card && card.classList.contains('flipped')) {
                     card.classList.remove('flipped');
                 }
+                
+                const frontImg = receipt.querySelector('img[alt="Receipt Front"]');
+                if (frontImg && frontImg.getAttribute('src').includes('1.jpeg')) {
+                    frontImg.setAttribute('src', frontImg.getAttribute('src').replace('1.jpeg', '.jpeg'));
+                }
             });
             
-            // 2. 계절 필터도 'All' 기본 상태로 리셋
             const allBtn = document.querySelector('.filter-btn');
             if (allBtn) filterSeason('all', allBtn);
         }
 
-        // 계절 필터링 함수
         function filterSeason(season, btnElement) {
-            // 모든 필터 버튼 스타일 초기화
             const allBtns = document.querySelectorAll('.filter-btn');
             allBtns.forEach(btn => {
                 btn.classList.remove('bg-black', 'text-white', 'shadow-lg');
                 btn.classList.add('text-gray-400', 'hover:text-black');
             });
             
-            // 클릭된 버튼 스타일 활성화
             btnElement.classList.remove('text-gray-400', 'hover:text-black');
             btnElement.classList.add('bg-black', 'text-white', 'shadow-lg');
 
-            // 영수증 블러 처리 및 클릭 차단 제어
             const receipts = document.querySelectorAll('.draggable-wrapper');
             receipts.forEach(receipt => {
                 if (season === 'all' || receipt.dataset.season === season) {
@@ -434,26 +404,22 @@
             });
         }
 
-        // 기억 목록에 추가 (하트 버튼 클릭) 및 이미지 토글
         function addMemory(event, bgColor, btn, originalSrc, filledSrc) {
-            event.stopPropagation(); // 카드 뒤집기 방지
+            event.stopPropagation();
             
             const container = btn.parentElement;
             const img = container.querySelector('img');
             let toastText = '기억 목록에 추가!';
 
-            // 현재 영수증의 계절 파악
             const wrapper = btn.closest('.draggable-wrapper');
             const season = wrapper ? wrapper.dataset.season : null;
             
-            // 현재 이미지가 원본이면 채워진 이미지로 변경, 아니면 원본으로 되돌림
             if (img.getAttribute('src') === originalSrc) {
                 img.setAttribute('src', filledSrc);
-                // 횟수 제한 없이 누르는 족족 카운트 증가
                 if (season) memoryCounts[season]++;
             } else {
                 img.setAttribute('src', originalSrc);
-                toastText = '기억 목록에서 삭제!'; // 취소했을 때의 멘트
+                toastText = '기억 목록에서 삭제!';
             }
 
             const existingToast = document.querySelector('.memory-toast');
@@ -461,25 +427,21 @@
             
             const toast = document.createElement('div');
             
-            // 테두리 제거, 그림자 추가(shadow-2xl), 화면 정중앙 고정 배치
             toast.className = 'memory-toast fixed top-1/2 left-1/2 w-[280px] md:w-[320px] receipt-zigzag font-pixel text-black text-sm lg:text-base font-bold text-center py-5 shadow-2xl transform -translate-x-1/2 -translate-y-1/2 scale-95 opacity-0 transition-all duration-300 z-[100] pointer-events-none';
             toast.style.backgroundColor = bgColor;
             toast.innerText = toastText;
             
-            // 카운터 화면 업데이트
             if (season) {
                 document.getElementById(`count-${season}`).innerText = `+${memoryCounts[season]}`;
             }
 
             document.body.appendChild(toast);
             
-            // 화면에 렌더링된 후 부드럽게 나타나는 애니메이션
             requestAnimationFrame(() => {
                 toast.classList.remove('scale-95', 'opacity-0');
                 toast.classList.add('scale-100');
             });
             
-            // 2초 후 스르륵 사라지기
             setTimeout(() => {
                 toast.classList.add('scale-95', 'opacity-0');
                 toast.classList.remove('scale-100');
@@ -487,18 +449,16 @@
                     if (document.body.contains(toast)) {
                         toast.remove();
                     }
-                }, 300); // 애니메이션 끝난 후 요소 완전 제거
+                }, 300);
             }, 2000);
         }
 
-        // 영수증 팝업 열기 함수
-        function showReceipt(event, title, theme, feeling, price) {
-            event.stopPropagation(); // 카드 뒤집기 방지
+        function showReceipt(event, title, theme, price) {
+            event.stopPropagation();
             
             document.getElementById('receiptTitle').innerText = title;
-            document.getElementById('receiptTheme').innerText = `Theme: ${theme}`;
-            document.getElementById('receiptFeeling').innerText = `Feeling: ${feeling}`;
-            document.getElementById('receiptPrice').innerText = `Price: ${price}`;
+            document.getElementById('receiptThemeVal').innerText = theme;
+            document.getElementById('receiptPriceVal').innerText = price;
 
             const modal = document.getElementById('receiptModal');
             const content = document.getElementById('receiptContent');
@@ -513,7 +473,6 @@
             });
         }
 
-        // 영수증 팝업 닫기 함수
         function closeReceipt() {
             const modal = document.getElementById('receiptModal');
             const content = document.getElementById('receiptContent');
@@ -528,12 +487,10 @@
             }, 300);
         }
 
-        // 드래그 앤 드롭 및 클릭(뒤집기) 기능 제어
         document.addEventListener('DOMContentLoaded', () => {
             const wrappers = document.querySelectorAll('.draggable-wrapper');
-            let highestZIndex = 20; // 드래그할 때 가장 위로 올라오도록 설정
+            let highestZIndex = 20;
 
-            // 커서 움직임에 따른 볼록렌즈 효과 제어
             const distortContainers = document.querySelectorAll('.distort-container');
             distortContainers.forEach(container => {
                 const moveDistortion = (e) => {
@@ -561,7 +518,6 @@
                 let startX, startY, initialLeft, initialTop;
                 let moved = false;
 
-                // 마우스 및 터치 이벤트 연결
                 wrapper.addEventListener('mousedown', dragStart);
                 wrapper.addEventListener('touchstart', dragStart, { passive: false });
 
@@ -579,7 +535,7 @@
                     initialTop = parseInt(style.top, 10) || 0;
                     
                     isDragging = true;
-                    moved = false; // 방금 누른 시점에는 아직 움직이지 않음
+                    moved = false;
 
                     highestZIndex++;
                     wrapper.style.zIndex = highestZIndex;
@@ -605,13 +561,12 @@
                     const dx = currentX - startX;
                     const dy = currentY - startY;
 
-                    // 아주 미세한 떨림은 클릭으로 간주하기 위해 임계값(3px)을 설정
                     if (Math.abs(dx) > 3 || Math.abs(dy) > 3) {
                         moved = true;
                     }
 
                     if (moved) {
-                        e.preventDefault(); // 드래그 중 텍스트 선택이나 화면 스크롤 방지
+                        e.preventDefault();
                         wrapper.style.left = (initialLeft + dx) + 'px';
                         wrapper.style.top = (initialTop + dy) + 'px';
                     }
@@ -625,7 +580,6 @@
                     document.removeEventListener('touchend', dragEnd);
                 }
 
-                // 카드를 마우스로 움직이지 않고 제자리에서 '클릭'만 했을 때 뒤집기 수행
                 wrapper.addEventListener('click', function(e) {
                     if (!moved) {
                         const card = wrapper.querySelector('.perspective');
@@ -638,4 +592,4 @@
         });
     </script>
 </body>
-</html>
+</html
