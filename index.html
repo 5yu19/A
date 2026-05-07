@@ -375,8 +375,8 @@
                 }
                 
                 const frontImg = receipt.querySelector('img[alt="Receipt Front"]');
-                if (frontImg && (frontImg.getAttribute('src').includes('1.jpeg') || frontImg.getAttribute('src').includes('1.png'))) {
-                    frontImg.setAttribute('src', frontImg.getAttribute('src').replace('1.jpeg', '.jpeg').replace('1.png', '.png'));
+                if (frontImg && frontImg.getAttribute('src').includes('1.jpeg')) {
+                    frontImg.setAttribute('src', frontImg.getAttribute('src').replace('1.jpeg', '.png'));
                 }
             });
             
