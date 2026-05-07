@@ -519,6 +519,11 @@
             });
 
             wrappers.forEach(wrapper => {
+                const frontImg = wrapper.querySelector('img[alt="Receipt Front"]');
+                if (frontImg && !frontImg.hasAttribute('data-original-src')) {
+                    frontImg.setAttribute('data-original-src', frontImg.getAttribute('src'));
+                }
+
                 let isDragging = false;
                 let startX, startY, initialLeft, initialTop;
                 let moved = false;
