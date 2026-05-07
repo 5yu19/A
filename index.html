@@ -409,17 +409,19 @@
             
             const container = btn.parentElement;
             const img = container.querySelector('img');
-            const toastText = '기억 목록에 추가!';
+            let toastText = '';
 
             const wrapper = btn.closest('.draggable-wrapper');
             const season = wrapper ? wrapper.dataset.season : null;
             
-            if (season) {
-                memoryCounts[season]++;
-            }
-
             if (img.getAttribute('src') === originalSrc) {
                 img.setAttribute('src', filledSrc);
+                toastText = '기억 목록에 추가!';
+                if (season) memoryCounts[season]++;
+            } else {
+                img.setAttribute('src', originalSrc);
+                toastText = '기억 목록에서 삭제!';
+                if (season) memoryCounts[season]--;
             }
 
             // --- 토스트 메시지 관련 로직 ---
