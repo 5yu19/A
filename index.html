@@ -5,6 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Intangible Store</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    screens: {
+                        '3xl': '1920px',
+                        '4xl': '2400px', 
+                        '5xl': '3200px',
+                        '6xl': '5000px', 
+                    }
+                }
+            }
+        }
+    </script>
     <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&amp;display=swap" rel="stylesheet">
     <style>
         @font-face {
@@ -40,15 +54,58 @@
         .flip-card-inner { transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
         .flipped .flip-card-inner { transform: rotateY(180deg); }
 
+        :root {
+            --zz-size-w: 12px;
+            --zz-size-h: 6px;
+            --zz-size-h2: 12px;
+            --zz-large-w: 36px;
+            --zz-large-h: 18px;
+            --zz-large-h2: 36px;
+            --lens-size: 140px;
+        }
+        @media (min-width: 2400px) {
+            :root {
+                --zz-size-w: 32px;
+                --zz-size-h: 16px;
+                --zz-size-h2: 32px;
+                --zz-large-w: 50px;
+                --zz-large-h: 25px;
+                --zz-large-h2: 50px;
+                --lens-size: 320px;
+            }
+        }
+        @media (min-width: 4000px) {
+            :root {
+                --zz-size-w: 64px;
+                --zz-size-h: 32px;
+                --zz-size-h2: 64px;
+                --zz-large-w: 90px;
+                --zz-large-h: 45px;
+                --zz-large-h2: 90px;
+                --lens-size: 480px;
+            }
+        }
+
         .receipt-zigzag {
             -webkit-mask: 
-                conic-gradient(from -45deg at bottom, transparent, #000 1deg 89deg, transparent 90deg) 0 100% / 12px 6px repeat-x,
-                conic-gradient(from 135deg at top, transparent, #000 1deg 89deg, transparent 90deg) 0 0 / 12px 6px repeat-x,
-                linear-gradient(#000 0 0) 0 6px / 100% calc(100% - 12px) no-repeat;
+                conic-gradient(from -45deg at bottom, transparent, #000 1deg 89deg, transparent 90deg) 50% 100% / var(--zz-size-w) var(--zz-size-h) repeat-x,
+                conic-gradient(from 135deg at top, transparent, #000 1deg 89deg, transparent 90deg) 50% 0 / var(--zz-size-w) var(--zz-size-h) repeat-x,
+                linear-gradient(#000 0 0) 50% var(--zz-size-h) / 100% calc(100% - var(--zz-size-h2)) no-repeat;
             mask: 
-                conic-gradient(from -45deg at bottom, transparent, #000 1deg 89deg, transparent 90deg) 0 100% / 12px 6px repeat-x,
-                conic-gradient(from 135deg at top, transparent, #000 1deg 89deg, transparent 90deg) 0 0 / 12px 6px repeat-x,
-                linear-gradient(#000 0 0) 0 6px / 100% calc(100% - 12px) no-repeat;
+                conic-gradient(from -45deg at bottom, transparent, #000 1deg 89deg, transparent 90deg) 50% 100% / var(--zz-size-w) var(--zz-size-h) repeat-x,
+                conic-gradient(from 135deg at top, transparent, #000 1deg 89deg, transparent 90deg) 50% 0 / var(--zz-size-w) var(--zz-size-h) repeat-x,
+                linear-gradient(#000 0 0) 50% var(--zz-size-h) / 100% calc(100% - var(--zz-size-h2)) no-repeat;
+        }
+
+        .receipt-zigzag-large {
+            -webkit-mask: 
+                conic-gradient(from -45deg at bottom, transparent, #000 1deg 89deg, transparent 90deg) 50% 100% / var(--zz-large-w) var(--zz-large-h) repeat-x,
+                conic-gradient(from 135deg at top, transparent, #000 1deg 89deg, transparent 90deg) 50% 0 / var(--zz-large-w) var(--zz-large-h) repeat-x,
+                linear-gradient(#000 0 0) 50% var(--zz-large-h) / 100% calc(100% - var(--zz-large-h2)) no-repeat;
+            mask: 
+                conic-gradient(from -45deg at bottom, transparent, #000 1deg 89deg, transparent 90deg) 50% 100% / var(--zz-large-w) var(--zz-large-h) repeat-x,
+                conic-gradient(from 135deg at top, transparent, #000 1deg 89deg, transparent 90deg) 50% 0 / var(--zz-large-w) var(--zz-large-h) repeat-x,
+                linear-gradient(#000 0 0) 50% var(--zz-large-h) / 100% calc(100% - var(--zz-large-h2)) no-repeat;
         }
 
         .circle-mask {
@@ -63,8 +120,8 @@
 
         .lens-wrapper {
             opacity: 0;
-            -webkit-mask-image: radial-gradient(circle 120px at var(--mouse-x) var(--mouse-y), black 60%, transparent 100%);
-            mask-image: radial-gradient(circle 120px at var(--mouse-x) var(--mouse-y), black 60%, transparent 100%);
+            -webkit-mask-image: radial-gradient(circle var(--lens-size) at var(--mouse-x) var(--mouse-y), black 60%, transparent 100%);
+            mask-image: radial-gradient(circle var(--lens-size) at var(--mouse-x) var(--mouse-y), black 60%, transparent 100%);
             transition: opacity 0.2s ease-out;
         }
         .distort-container:hover .lens-wrapper {
@@ -88,275 +145,277 @@
         </svg>
     </div>
 
-    <header id="mainHeader" class="fixed top-0 left-0 w-full p-8 lg:p-12 pl-12 lg:pl-20 flex justify-between items-center z-50">
-        <div class="flex items-center gap-12">
-            <div class="text-[11px] lg:text-[14px] tracking-[0.25em] font-bold uppercase opacity-80">
+    <header id="mainHeader" class="fixed top-0 left-0 w-full p-8 lg:p-12 4xl:p-16 6xl:p-32 pl-12 lg:pl-20 4xl:pl-28 6xl:pl-64 flex justify-between items-center z-50">
+        <div class="flex items-center gap-12 4xl:gap-20 6xl:gap-48">
+            <div class="text-[14px] lg:text-[18px] 4xl:text-[26px] 6xl:text-[60px] tracking-[0.25em] font-bold uppercase opacity-80">
                 Intangible Store
             </div>
             <div class="flex items-center gap-2">
                 <button onclick="resetStore()" class="flex items-center justify-center p-1 hover:opacity-50 active:scale-95 transition-all" title="위치 초기화">
-                    <svg class="w-3.5 h-3.5 lg:w-4 lg:h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <svg class="w-3.5 h-3.5 lg:w-4 lg:h-4 4xl:w-6 4xl:h-6 6xl:w-16 6xl:h-16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
                         <path d="M3 3v5h5" />
                     </svg>
                 </button>
             </div>
 
-            <div class="flex items-center gap-4 lg:gap-6 text-[10px] lg:text-[12px] font-pixel font-bold pt-1">
-                <div class="flex items-center gap-1.5" title="Spring"><span class="text-pink-300 text-sm">♥</span><span id="count-spring">+0</span></div>
-                <div class="flex items-center gap-1.5" title="Summer"><span class="text-emerald-300 text-sm">♥</span><span id="count-summer">+0</span></div>
-                <div class="flex items-center gap-1.5" title="Autumn"><span class="text-yellow-400 text-sm">♥</span><span id="count-autumn">+0</span></div>
-                <div class="flex items-center gap-1.5" title="Winter"><span class="text-sky-300 text-sm">♥</span><span id="count-winter">+0</span></div>
+            <div class="flex items-center gap-4 lg:gap-6 4xl:gap-10 6xl:gap-24 text-[13px] lg:text-[16px] 4xl:text-[24px] 6xl:text-[48px] font-pixel font-bold pt-1">
+                <div class="flex items-center gap-1.5 4xl:gap-2.5 6xl:gap-4" title="Spring"><span class="text-pink-300 text-sm 4xl:text-xl 6xl:text-5xl">♥</span><span id="count-spring">+0</span></div>
+                <div class="flex items-center gap-1.5 4xl:gap-2.5 6xl:gap-4" title="Summer"><span class="text-emerald-300 text-sm 4xl:text-xl 6xl:text-5xl">♥</span><span id="count-summer">+0</span></div>
+                <div class="flex items-center gap-1.5 4xl:gap-2.5 6xl:gap-4" title="Autumn"><span class="text-yellow-400 text-sm 4xl:text-xl 6xl:text-5xl">♥</span><span id="count-autumn">+0</span></div>
+                <div class="flex items-center gap-1.5 4xl:gap-2.5 6xl:gap-4" title="Winter"><span class="text-sky-300 text-sm 4xl:text-xl 6xl:text-5xl">♥</span><span id="count-winter">+0</span></div>
             </div>
         </div>
 
         <nav class="flex items-center gap-6">
             <div class="flex bg-black/5 p-1 rounded-full backdrop-blur-sm">
-                <button onclick="filterSeason('all', this)" class="filter-btn px-5 py-1.5 lg:px-8 lg:py-2.5 text-[10px] lg:text-[12px] uppercase font-bold tracking-widest bg-black text-white rounded-full shadow-lg transition-colors">All</button>
-                <button onclick="filterSeason('spring', this)" class="filter-btn px-5 py-1.5 lg:px-8 lg:py-2.5 text-[10px] lg:text-[12px] uppercase font-bold tracking-widest text-gray-400 hover:text-black rounded-full transition-colors">Spring</button>
-                <button onclick="filterSeason('summer', this)" class="filter-btn px-5 py-1.5 lg:px-8 lg:py-2.5 text-[10px] lg:text-[12px] uppercase font-bold tracking-widest text-gray-400 hover:text-black rounded-full transition-colors">Summer</button>
-                <button onclick="filterSeason('autumn', this)" class="filter-btn px-5 py-1.5 lg:px-8 lg:py-2.5 text-[10px] lg:text-[12px] uppercase font-bold tracking-widest text-gray-400 hover:text-black rounded-full transition-colors">Autumn</button>
-                <button onclick="filterSeason('winter', this)" class="filter-btn px-5 py-1.5 lg:px-8 lg:py-2.5 text-[10px] lg:text-[12px] uppercase font-bold tracking-widest text-gray-400 hover:text-black rounded-full transition-colors">Winter</button>
+                <button onclick="filterSeason('all', this)" class="filter-btn px-5 py-1.5 lg:px-8 lg:py-2.5 4xl:px-12 4xl:py-3.5 6xl:px-32 6xl:py-10 text-[12px] lg:text-[14px] 4xl:text-[20px] 6xl:text-[48px] uppercase font-bold tracking-widest bg-black text-white rounded-full shadow-lg transition-colors">All</button>
+                <button onclick="filterSeason('spring', this)" class="filter-btn px-5 py-1.5 lg:px-8 lg:py-2.5 4xl:px-12 4xl:py-3.5 6xl:px-32 6xl:py-10 text-[12px] lg:text-[14px] 4xl:text-[20px] 6xl:text-[48px] uppercase font-bold tracking-widest text-gray-400 hover:text-black rounded-full transition-colors">Spring</button>
+                <button onclick="filterSeason('summer', this)" class="filter-btn px-5 py-1.5 lg:px-8 lg:py-2.5 4xl:px-12 4xl:py-3.5 6xl:px-32 6xl:py-10 text-[12px] lg:text-[14px] 4xl:text-[20px] 6xl:text-[48px] uppercase font-bold tracking-widest text-gray-400 hover:text-black rounded-full transition-colors">Summer</button>
+                <button onclick="filterSeason('autumn', this)" class="filter-btn px-5 py-1.5 lg:px-8 lg:py-2.5 4xl:px-12 4xl:py-3.5 6xl:px-32 6xl:py-10 text-[12px] lg:text-[14px] 4xl:text-[20px] 6xl:text-[48px] uppercase font-bold tracking-widest text-gray-400 hover:text-black rounded-full transition-colors">Autumn</button>
+                <button onclick="filterSeason('winter', this)" class="filter-btn px-5 py-1.5 lg:px-8 lg:py-2.5 4xl:px-12 4xl:py-3.5 6xl:px-32 6xl:py-10 text-[12px] lg:text-[14px] 4xl:text-[20px] 6xl:text-[48px] uppercase font-bold tracking-widest text-gray-400 hover:text-black rounded-full transition-colors">Winter</button>
             </div>
         </nav>
     </header>
 
     <main id="storeView" class="relative min-h-screen flex flex-col justify-start pb-32 lg:pb-48">
-        <div class="relative z-50 max-w-fit pl-12 lg:pl-20 pt-20 lg:pt-28 pointer-events-none">
-            <h1 class="font-pixel text-[40px] lg:text-[70px] xl:text-[90px] leading-none tracking-[-0.05em] text-black/80 mb-2 lg:mb-4 select-none">
+        <div class="relative z-50 max-w-fit pl-12 lg:pl-20 4xl:pl-28 6xl:pl-64 pt-44 lg:pt-56 4xl:pt-64 6xl:pt-[22rem] pointer-events-none">
+            <h1 class="font-pixel -ml-1 lg:-ml-2 4xl:-ml-3 6xl:-ml-6 text-[40px] lg:text-[70px] xl:text-[90px] 4xl:text-[130px] 6xl:text-[280px] leading-none tracking-[-0.05em] text-black/80 mb-2 lg:mb-4 4xl:mb-6 6xl:mb-16 select-none">
                 memories
             </h1>
-            <div class="flex items-center gap-3 ml-1 lg:ml-2 xl:ml-3">
-                <span class="text-[8px] lg:text-[15px] tracking-[0.4em] text-black/50 uppercase font-bold">
+            <div class="flex items-center gap-3 4xl:gap-5 6xl:gap-12 ml-0 lg:-ml-1 4xl:-ml-1 6xl:-ml-2">
+                <span class="text-[8px] lg:text-[15px] 4xl:text-[22px] 6xl:text-[48px] tracking-[0.4em] text-black/50 uppercase font-bold">
                     8 Sensations
                 </span>
-                <span class="font-pixel text-[8px] lg:text-[15px] tracking-widest text-black/50 font-bold">
+                <span class="font-pixel text-[8px] lg:text-[15px] 4xl:text-[22px] 6xl:text-[48px] tracking-widest text-black/50 font-bold">
                     - 카드를 눌러보세요!
                 </span>
             </div>
         </div>
 
-        <div class="relative z-40 w-full max-w-[1600px] 2xl:max-w-[2000px] mx-auto grid grid-cols-2 lg:grid-cols-4 place-items-center gap-x-6 lg:gap-x-12 2xl:gap-x-20 gap-y-16 lg:gap-y-28 px-8 lg:px-16 mt-16 lg:mt-32">
-            
-    <div class="draggable-wrapper relative cursor-grab active:cursor-grabbing z-10 transition-all duration-500" data-season="spring" style="left: 0; top: 0;">
-        <div class="perspective w-40 md:w-56 xl:w-64 2xl:w-72 aspect-[461/880] translate-y-4 lg:translate-y-8 rotate-2 hover:scale-105 transition-transform duration-300 group drop-shadow-md">
-            <div class="flip-card-inner transform-style-3d relative w-full h-full pointer-events-none">
-                <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#fdf2f3] p-2">
-                    <div class="relative w-full h-full bg-white receipt-zigzag">
-                        <img src="hi/ff.png" alt="Receipt Front" draggable="false" class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 transition-all pointer-events-auto">
+        <div class="relative z-40 w-full max-w-[1920px] 2xl:max-w-[2200px] 3xl:max-w-[2600px] 4xl:max-w-[3600px] 6xl:max-w-[5000px] mx-auto grid grid-cols-2 xl:grid-cols-4 place-items-center gap-x-6 xl:gap-x-12 2xl:gap-x-20 4xl:gap-x-24 6xl:gap-x-48 gap-y-12 xl:gap-y-24 4xl:gap-y-24 6xl:gap-y-32 px-4 sm:px-8 xl:px-16 4xl:px-24 6xl:px-48 mt-8 xl:mt-16 4xl:mt-12 6xl:mt-20">
+
+            <div class="draggable-wrapper w-full max-w-[230px] sm:max-w-[280px] xl:max-w-[330px] 2xl:max-w-[400px] 3xl:max-w-[480px] 4xl:max-w-[680px] 6xl:max-w-[940px] relative cursor-grab active:cursor-grabbing z-10 transition-all duration-500" data-season="spring" style="left: 0; top: 0;">
+                <div class="perspective relative w-full aspect-[461/880] translate-y-4 lg:translate-y-8 4xl:translate-y-16 6xl:translate-y-24 rotate-2 hover:scale-105 transition-transform duration-300 group drop-shadow-md">
+                    <div class="flip-card-inner transform-style-3d absolute inset-0 pointer-events-none">
+                        <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#fdf2f3] p-3 4xl:p-5 6xl:p-8">
+                            <div class="relative w-full h-full bg-white receipt-zigzag">
+                                <img src="hi/ff.png" alt="Receipt Front" draggable="false" class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 transition-all pointer-events-auto">
                                 <div onclick="addMemory(event, '#fdf2f3', this, 'hi/ff.png', 'hi/ff1.jpeg')" class="absolute bottom-[2%] left-[5%] w-[25%] h-[12%] z-20 cursor-pointer pointer-events-auto"></div>
                                 <div onclick='showReceipt(event, "Blooming Excitement", "spring", "a longing for spring")' class="absolute bottom-[2%] right-[5%] w-[60%] h-[12%] z-20 cursor-pointer pointer-events-auto"></div>
-                    </div>
-                </div>
-                <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#fdf2f3] p-2 rotate-y-180">
-                    <div class="relative w-full h-full bg-[#1d1d1d] receipt-zigzag distort-container overflow-hidden pointer-events-auto">
-                        <img src="hi/fb.jpg" alt="Receipt Back Base" draggable="false" class="absolute inset-0 w-full h-full object-cover pointer-events-none">
-                        <div class="absolute inset-0 w-full h-full pointer-events-none circle-mask">
-                            <div class="w-full h-full pointer-events-none lens-wrapper">
-                                <img src="hi/fb.jpg" alt="Receipt Back Lens" draggable="false" class="absolute inset-0 w-full h-full object-cover lens-image">
+                            </div>
+                        </div>
+                        <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#fdf2f3] p-3 4xl:p-5 6xl:p-8 rotate-y-180">
+                            <div class="relative w-full h-full bg-[#1d1d1d] receipt-zigzag distort-container overflow-hidden pointer-events-auto">
+                                <img src="hi/fb.jpg" alt="Receipt Back Base" draggable="false" class="absolute inset-0 w-full h-full object-cover pointer-events-none">
+                                <div class="absolute inset-0 w-full h-full pointer-events-none circle-mask">
+                                    <div class="w-full h-full pointer-events-none lens-wrapper">
+                                        <img src="hi/fb.jpg" alt="Receipt Back Lens" draggable="false" class="absolute inset-0 w-full h-full object-cover lens-image">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <div class="draggable-wrapper relative cursor-grab active:cursor-grabbing z-10 transition-all duration-500" data-season="winter" style="left: 0; top: 0;">
-        <div class="perspective w-40 md:w-56 xl:w-64 2xl:w-72 aspect-[461/880] -translate-y-6 lg:-translate-y-12 -rotate-3 hover:scale-105 transition-transform duration-300 group drop-shadow-md">
-            <div class="flip-card-inner transform-style-3d relative w-full h-full pointer-events-none">
-                <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#d9ecfb] p-2">
-                    <div class="relative w-full h-full bg-white receipt-zigzag">
-                        <img src="hi/sf.png" alt="Receipt Front" draggable="false" class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 transition-all pointer-events-auto">
+            <div class="draggable-wrapper w-full max-w-[230px] sm:max-w-[280px] xl:max-w-[330px] 2xl:max-w-[400px] 3xl:max-w-[480px] 4xl:max-w-[680px] 6xl:max-w-[940px] relative cursor-grab active:cursor-grabbing z-10 transition-all duration-500" data-season="winter" style="left: 0; top: 0;">
+                <div class="perspective relative w-full aspect-[461/880] -translate-y-6 lg:-translate-y-12 4xl:-translate-y-16 6xl:-translate-y-24 -rotate-3 hover:scale-105 transition-transform duration-300 group drop-shadow-md">
+                    <div class="flip-card-inner transform-style-3d absolute inset-0 pointer-events-none">
+                        <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#d9ecfb] p-3 4xl:p-5 6xl:p-8">
+                            <div class="relative w-full h-full bg-white receipt-zigzag">
+                                <img src="hi/sf.png" alt="Receipt Front" draggable="false" class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 transition-all pointer-events-auto">
                                 <div onclick="addMemory(event, '#d9ecfb', this, 'hi/sf.png', 'hi/sf1.jpeg')" class="absolute bottom-[2%] left-[5%] w-[25%] h-[12%] z-20 cursor-pointer pointer-events-auto"></div>
                                 <div onclick='showReceipt(event, "Snowman&#39;s Smile", "winter", "Red-tipped Nose")' class="absolute bottom-[2%] right-[5%] w-[60%] h-[12%] z-20 cursor-pointer pointer-events-auto"></div>
-                    </div>
-                </div>
-                <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#d9ecfb] p-2 rotate-y-180">
-                    <div class="relative w-full h-full bg-[#1d1d1d] receipt-zigzag distort-container overflow-hidden pointer-events-auto">
-                        <img src="hi/sb.jpg" alt="Receipt Back Base" draggable="false" class="absolute inset-0 w-full h-full object-cover pointer-events-none">
-                        <div class="absolute inset-0 w-full h-full pointer-events-none circle-mask">
-                            <div class="w-full h-full pointer-events-none lens-wrapper">
-                                <img src="hi/sb.jpg" alt="Receipt Back Lens" draggable="false" class="absolute inset-0 w-full h-full object-cover lens-image">
+                            </div>
+                        </div>
+                        <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#d9ecfb] p-3 4xl:p-5 6xl:p-8 rotate-y-180">
+                            <div class="relative w-full h-full bg-[#1d1d1d] receipt-zigzag distort-container overflow-hidden pointer-events-auto">
+                                <img src="hi/sb.jpg" alt="Receipt Back Base" draggable="false" class="absolute inset-0 w-full h-full object-cover pointer-events-none">
+                                <div class="absolute inset-0 w-full h-full pointer-events-none circle-mask">
+                                    <div class="w-full h-full pointer-events-none lens-wrapper">
+                                        <img src="hi/sb.jpg" alt="Receipt Back Lens" draggable="false" class="absolute inset-0 w-full h-full object-cover lens-image">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <div class="draggable-wrapper relative cursor-grab active:cursor-grabbing z-10 transition-all duration-500" data-season="summer" style="left: 0; top: 0;">
-        <div class="perspective w-40 md:w-56 xl:w-64 2xl:w-72 aspect-[461/880] translate-y-12 lg:translate-y-20 rotate-1 hover:scale-105 transition-transform duration-300 group drop-shadow-md">
-            <div class="flip-card-inner transform-style-3d relative w-full h-full pointer-events-none">
-                <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#d8f0e0] p-2">
-                    <div class="relative w-full h-full bg-white receipt-zigzag">
-                        <img src="hi/wf.png" alt="Receipt Front" draggable="false" class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 transition-all pointer-events-auto">
+            <div class="draggable-wrapper w-full max-w-[230px] sm:max-w-[280px] xl:max-w-[330px] 2xl:max-w-[400px] 3xl:max-w-[480px] 4xl:max-w-[680px] 6xl:max-w-[940px] relative cursor-grab active:cursor-grabbing z-10 transition-all duration-500" data-season="summer" style="left: 0; top: 0;">
+                <div class="perspective relative w-full aspect-[461/880] translate-y-2 lg:translate-y-4 4xl:translate-y-8 6xl:translate-y-16 rotate-1 hover:scale-105 transition-transform duration-300 group drop-shadow-md">
+                    <div class="flip-card-inner transform-style-3d absolute inset-0 pointer-events-none">
+                        <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#d8f0e0] p-3 4xl:p-5 6xl:p-8">
+                            <div class="relative w-full h-full bg-white receipt-zigzag">
+                                <img src="hi/wf.png" alt="Receipt Front" draggable="false" class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 transition-all pointer-events-auto">
                                 <div onclick="addMemory(event, '#d8f0e0', this, 'hi/wf.png', 'hi/wf1.jpeg')" class="absolute bottom-[2%] left-[5%] w-[25%] h-[12%] z-20 cursor-pointer pointer-events-auto"></div>
                                 <div onclick='showReceipt(event, "A Slice of Summer", "summer", "a body softened in the sun")' class="absolute bottom-[2%] right-[5%] w-[60%] h-[12%] z-20 cursor-pointer pointer-events-auto"></div>
-                    </div>
-                </div>
-                <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#d8f0e0] p-2 rotate-y-180">
-                    <div class="relative w-full h-full bg-[#1d1d1d] receipt-zigzag distort-container overflow-hidden pointer-events-auto">
-                        <img src="hi/wb.jpg" alt="Receipt Back Base" draggable="false" class="absolute inset-0 w-full h-full object-cover pointer-events-none">
-                        <div class="absolute inset-0 w-full h-full pointer-events-none circle-mask">
-                            <div class="w-full h-full pointer-events-none lens-wrapper">
-                                <img src="hi/wb.jpg" alt="Receipt Back Lens" draggable="false" class="absolute inset-0 w-full h-full object-cover lens-image">
+                            </div>
+                        </div>
+                        <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#d8f0e0] p-3 4xl:p-5 6xl:p-8 rotate-y-180">
+                            <div class="relative w-full h-full bg-[#1d1d1d] receipt-zigzag distort-container overflow-hidden pointer-events-auto">
+                                <img src="hi/wb.jpg" alt="Receipt Back Base" draggable="false" class="absolute inset-0 w-full h-full object-cover pointer-events-none">
+                                <div class="absolute inset-0 w-full h-full pointer-events-none circle-mask">
+                                    <div class="w-full h-full pointer-events-none lens-wrapper">
+                                        <img src="hi/wb.jpg" alt="Receipt Back Lens" draggable="false" class="absolute inset-0 w-full h-full object-cover lens-image">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <div class="draggable-wrapper relative cursor-grab active:cursor-grabbing z-10 transition-all duration-500" data-season="autumn" style="left: 0; top: 0;">
-        <div class="perspective w-40 md:w-56 xl:w-64 2xl:w-72 aspect-[461/880] translate-y-2 lg:translate-y-4 -rotate-2 hover:scale-105 transition-transform duration-300 group drop-shadow-md">
-            <div class="flip-card-inner transform-style-3d relative w-full h-full pointer-events-none">
-                <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#FFEFD5] p-2">
-                    <div class="relative w-full h-full bg-white receipt-zigzag">
-                        <img src="hi/bf.png" alt="Receipt Front" draggable="false" class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 transition-all pointer-events-auto">
+            <div class="draggable-wrapper w-full max-w-[230px] sm:max-w-[280px] xl:max-w-[330px] 2xl:max-w-[400px] 3xl:max-w-[480px] 4xl:max-w-[680px] 6xl:max-w-[940px] relative cursor-grab active:cursor-grabbing z-10 transition-all duration-500" data-season="autumn" style="left: 0; top: 0;">
+                <div class="perspective relative w-full aspect-[461/880] translate-y-4 lg:translate-y-8 4xl:translate-y-16 6xl:translate-y-24 rotate-2 hover:scale-105 transition-transform duration-300 group drop-shadow-md">
+                    <div class="flip-card-inner transform-style-3d absolute inset-0 pointer-events-none">
+                        <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#FFEFD5] p-3 4xl:p-5 6xl:p-8">
+                            <div class="relative w-full h-full bg-white receipt-zigzag">
+                                <img src="hi/bf.png" alt="Receipt Front" draggable="false" class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 transition-all pointer-events-auto">
                                 <div onclick="addMemory(event, '#FFEFD5', this, 'hi/bf.png', 'hi/bf1.jpeg')" class="absolute bottom-[2%] left-[5%] w-[25%] h-[12%] z-20 cursor-pointer pointer-events-auto"></div>
                                 <div onclick='showReceipt(event, "Golden Trail", "autumn", "thoughts scattered in the wind")' class="absolute bottom-[2%] right-[5%] w-[60%] h-[12%] z-20 cursor-pointer pointer-events-auto"></div>
-                    </div>
-                </div>
-                <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#FFEFD5] p-2 rotate-y-180">
-                    <div class="relative w-full h-full bg-[#1d1d1d] receipt-zigzag distort-container overflow-hidden pointer-events-auto">
-                        <img src="hi/bb.jpg" alt="Receipt Back Base" draggable="false" class="absolute inset-0 w-full h-full object-cover pointer-events-none">
-                        <div class="absolute inset-0 w-full h-full pointer-events-none circle-mask">
-                            <div class="w-full h-full pointer-events-none lens-wrapper">
-                                <img src="hi/bb.jpg" alt="Receipt Back Lens" draggable="false" class="absolute inset-0 w-full h-full object-cover lens-image">
+                            </div>
+                        </div>
+                        <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#FFEFD5] p-3 4xl:p-5 6xl:p-8 rotate-y-180">
+                            <div class="relative w-full h-full bg-[#1d1d1d] receipt-zigzag distort-container overflow-hidden pointer-events-auto">
+                                <img src="hi/bb.jpg" alt="Receipt Back Base" draggable="false" class="absolute inset-0 w-full h-full object-cover pointer-events-none">
+                                <div class="absolute inset-0 w-full h-full pointer-events-none circle-mask">
+                                    <div class="w-full h-full pointer-events-none lens-wrapper">
+                                        <img src="hi/bb.jpg" alt="Receipt Back Lens" draggable="false" class="absolute inset-0 w-full h-full object-cover lens-image">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <div class="draggable-wrapper relative cursor-grab active:cursor-grabbing z-10 transition-all duration-500" data-season="winter" style="left: 0; top: 0;">
-        <div class="perspective w-40 md:w-56 xl:w-64 2xl:w-72 aspect-[461/880] -translate-y-8 lg:-translate-y-16 rotate-3 hover:scale-105 transition-transform duration-300 group drop-shadow-md">
-            <div class="flip-card-inner transform-style-3d relative w-full h-full pointer-events-none">
-                <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#d9ecfb] p-2">
-                    <div class="relative w-full h-full bg-white receipt-zigzag">
-                        <img src="hi/cf.png" alt="Receipt Front" draggable="false" class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 transition-all pointer-events-auto">
+            <div class="draggable-wrapper w-full max-w-[230px] sm:max-w-[280px] xl:max-w-[330px] 2xl:max-w-[400px] 3xl:max-w-[480px] 4xl:max-w-[680px] 6xl:max-w-[940px] relative cursor-grab active:cursor-grabbing z-10 transition-all duration-500" data-season="winter" style="left: 0; top: 0;">
+                <div class="perspective relative w-full aspect-[461/880] -translate-y-2 lg:-translate-y-4 4xl:-translate-y-12 6xl:-translate-y-20 rotate-3 hover:scale-105 transition-transform duration-300 group drop-shadow-md">
+                    <div class="flip-card-inner transform-style-3d absolute inset-0 pointer-events-none">
+                        <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#d9ecfb] p-3 4xl:p-5 6xl:p-8">
+                            <div class="relative w-full h-full bg-white receipt-zigzag">
+                                <img src="hi/cf.png" alt="Receipt Front" draggable="false" class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 transition-all pointer-events-auto">
                                 <div onclick="addMemory(event, '#d9ecfb', this, 'hi/cf.png', 'hi/cf1.jpeg')" class="absolute bottom-[2%] left-[5%] w-[25%] h-[12%] z-20 cursor-pointer pointer-events-auto"></div>
                                 <div onclick='showReceipt(event, "The Eve of a Miracle", "winter", "a sincere wish")' class="absolute bottom-[2%] right-[5%] w-[60%] h-[12%] z-20 cursor-pointer pointer-events-auto"></div>
-                    </div>
-                </div>
-                <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#d9ecfb] p-2 rotate-y-180">
-                    <div class="relative w-full h-full bg-[#1d1d1d] receipt-zigzag distort-container overflow-hidden pointer-events-auto">
-                        <img src="hi/cb.jpg" alt="Receipt Back Base" draggable="false" class="absolute inset-0 w-full h-full object-cover pointer-events-none">
-                        <div class="absolute inset-0 w-full h-full pointer-events-none circle-mask">
-                            <div class="w-full h-full pointer-events-none lens-wrapper">
-                                <img src="hi/cb.jpg" alt="Receipt Back Lens" draggable="false" class="absolute inset-0 w-full h-full object-cover lens-image">
+                            </div>
+                        </div>
+                        <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#d9ecfb] p-3 4xl:p-5 6xl:p-8 rotate-y-180">
+                            <div class="relative w-full h-full bg-[#1d1d1d] receipt-zigzag distort-container overflow-hidden pointer-events-auto">
+                                <img src="hi/cb.jpg" alt="Receipt Back Base" draggable="false" class="absolute inset-0 w-full h-full object-cover pointer-events-none">
+                                <div class="absolute inset-0 w-full h-full pointer-events-none circle-mask">
+                                    <div class="w-full h-full pointer-events-none lens-wrapper">
+                                        <img src="hi/cb.jpg" alt="Receipt Back Lens" draggable="false" class="absolute inset-0 w-full h-full object-cover lens-image">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <div class="draggable-wrapper relative cursor-grab active:cursor-grabbing z-10 transition-all duration-500" data-season="summer" style="left: 0; top: 0;">
-        <div class="perspective w-40 md:w-56 xl:w-64 2xl:w-72 aspect-[461/880] -translate-y-12 lg:-translate-y-20 -rotate-1 hover:scale-105 transition-transform duration-300 group drop-shadow-md">
-            <div class="flip-card-inner transform-style-3d relative w-full h-full pointer-events-none">
-                <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#d8f0e0] p-2">
-                    <div class="relative w-full h-full bg-white receipt-zigzag">
-                        <img src="hi/rf.png" alt="Receipt Front" draggable="false" class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 transition-all pointer-events-auto">
+            <div class="draggable-wrapper w-full max-w-[230px] sm:max-w-[280px] xl:max-w-[330px] 2xl:max-w-[400px] 3xl:max-w-[480px] 4xl:max-w-[680px] 6xl:max-w-[940px] relative cursor-grab active:cursor-grabbing z-10 transition-all duration-500" data-season="summer" style="left: 0; top: 0;">
+                <div class="perspective relative w-full aspect-[461/880] -translate-y-12 lg:-translate-y-20 4xl:-translate-y-24 6xl:-translate-y-40 -rotate-1 hover:scale-105 transition-transform duration-300 group drop-shadow-md">
+                    <div class="flip-card-inner transform-style-3d absolute inset-0 pointer-events-none">
+                        <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#d8f0e0] p-3 4xl:p-5 6xl:p-8">
+                            <div class="relative w-full h-full bg-white receipt-zigzag">
+                                <img src="hi/rf.png" alt="Receipt Front" draggable="false" class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 transition-all pointer-events-auto">
                                 <div onclick="addMemory(event, '#d8f0e0', this, 'hi/rf.png', 'hi/rf1.jpeg')" class="absolute bottom-[2%] left-[5%] w-[25%] h-[12%] z-20 cursor-pointer pointer-events-auto"></div>
                                 <div onclick='showReceipt(event, "Humidity of the Rainy Season", "summer", "The moment of splashing in the water")' class="absolute bottom-[2%] right-[5%] w-[60%] h-[12%] z-20 cursor-pointer pointer-events-auto"></div>
-                    </div>
-                </div>
-                <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#d8f0e0] p-2 rotate-y-180">
-                    <div class="relative w-full h-full bg-[#1d1d1d] receipt-zigzag distort-container overflow-hidden pointer-events-auto">
-                        <img src="hi/rb.jpg" alt="Receipt Back Base" draggable="false" class="absolute inset-0 w-full h-full object-cover pointer-events-none">
-                        <div class="absolute inset-0 w-full h-full pointer-events-none circle-mask">
-                            <div class="w-full h-full pointer-events-none lens-wrapper">
-                                <img src="hi/rb.jpg" alt="Receipt Back Lens" draggable="false" class="absolute inset-0 w-full h-full object-cover lens-image">
+                            </div>
+                        </div>
+                        <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#d8f0e0] p-3 4xl:p-5 6xl:p-8 rotate-y-180">
+                            <div class="relative w-full h-full bg-[#1d1d1d] receipt-zigzag distort-container overflow-hidden pointer-events-auto">
+                                <img src="hi/rb.jpg" alt="Receipt Back Base" draggable="false" class="absolute inset-0 w-full h-full object-cover pointer-events-none">
+                                <div class="absolute inset-0 w-full h-full pointer-events-none circle-mask">
+                                    <div class="w-full h-full pointer-events-none lens-wrapper">
+                                        <img src="hi/rb.jpg" alt="Receipt Back Lens" draggable="false" class="absolute inset-0 w-full h-full object-cover lens-image">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <div class="draggable-wrapper relative cursor-grab active:cursor-grabbing z-10 transition-all duration-500" data-season="autumn" style="left: 0; top: 0;">
-        <div class="perspective w-40 md:w-56 xl:w-64 2xl:w-72 aspect-[461/880] -translate-y-2 lg:-translate-y-6 rotate-2 hover:scale-105 transition-transform duration-300 group drop-shadow-md">
-            <div class="flip-card-inner transform-style-3d relative w-full h-full pointer-events-none">
-                <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#FFEFD5] p-2">
-                    <div class="relative w-full h-full bg-white receipt-zigzag">
-                        <img src="hi/lf.png" alt="Receipt Front" draggable="false" class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 transition-all pointer-events-auto">
+            <div class="draggable-wrapper w-full max-w-[230px] sm:max-w-[280px] xl:max-w-[330px] 2xl:max-w-[400px] 3xl:max-w-[480px] 4xl:max-w-[680px] 6xl:max-w-[940px] relative cursor-grab active:cursor-grabbing z-10 transition-all duration-500" data-season="autumn" style="left: 0; top: 0;">
+                <div class="perspective relative w-full aspect-[461/880] -translate-y-2 lg:-translate-y-4 4xl:-translate-y-10 6xl:-translate-y-16 rotate-2 hover:scale-105 transition-transform duration-300 group drop-shadow-md">
+                    <div class="flip-card-inner transform-style-3d absolute inset-0 pointer-events-none">
+                        <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#FFEFD5] p-3 4xl:p-5 6xl:p-8">
+                            <div class="relative w-full h-full bg-white receipt-zigzag">
+                                <img src="hi/lf.png" alt="Receipt Front" draggable="false" class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 transition-all pointer-events-auto">
                                 <div onclick="addMemory(event, '#FFEFD5', this, 'hi/lf.png', 'hi/lf1.jpeg')" class="absolute bottom-[2%] left-[5%] w-[25%] h-[12%] z-20 cursor-pointer pointer-events-auto"></div>
                                 <div onclick='showReceipt(event, "Lingering Autumn", "autumn", "Whispering, rustling memories")' class="absolute bottom-[2%] right-[5%] w-[60%] h-[12%] z-20 cursor-pointer pointer-events-auto"></div>
-                    </div>
-                </div>
-                <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#FFEFD5] p-2 rotate-y-180">
-                    <div class="relative w-full h-full bg-[#1d1d1d] receipt-zigzag distort-container overflow-hidden pointer-events-auto">
-                        <img src="hi/lb.jpg" alt="Receipt Back Base" draggable="false" class="absolute inset-0 w-full h-full object-cover pointer-events-none">
-                        <div class="absolute inset-0 w-full h-full pointer-events-none circle-mask">
-                            <div class="w-full h-full pointer-events-none lens-wrapper">
-                                <img src="hi/lb.jpg" alt="Receipt Back Lens" draggable="false" class="absolute inset-0 w-full h-full object-cover lens-image">
+                            </div>
+                        </div>
+                        <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#FFEFD5] p-3 4xl:p-5 6xl:p-8 rotate-y-180">
+                            <div class="relative w-full h-full bg-[#1d1d1d] receipt-zigzag distort-container overflow-hidden pointer-events-auto">
+                                <img src="hi/lb.jpg" alt="Receipt Back Base" draggable="false" class="absolute inset-0 w-full h-full object-cover pointer-events-none">
+                                <div class="absolute inset-0 w-full h-full pointer-events-none circle-mask">
+                                    <div class="w-full h-full pointer-events-none lens-wrapper">
+                                        <img src="hi/lb.jpg" alt="Receipt Back Lens" draggable="false" class="absolute inset-0 w-full h-full object-cover lens-image">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <div class="draggable-wrapper relative cursor-grab active:cursor-grabbing z-10 transition-all duration-500" data-season="spring" style="left: 0; top: 0;">
-        <div class="perspective w-40 md:w-56 xl:w-64 2xl:w-72 aspect-[461/880] translate-y-8 lg:translate-y-16 -rotate-3 hover:scale-105 transition-transform duration-300 group drop-shadow-md">
-            <div class="flip-card-inner transform-style-3d relative w-full h-full pointer-events-none">
-                <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#fdf2f3] p-2">
-                    <div class="relative w-full h-full bg-white receipt-zigzag">
-                        <img src="hi/af.png" alt="Receipt Front" draggable="false" class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 transition-all pointer-events-auto">
+            <div class="draggable-wrapper w-full max-w-[230px] sm:max-w-[280px] xl:max-w-[330px] 2xl:max-w-[400px] 3xl:max-w-[480px] 4xl:max-w-[680px] 6xl:max-w-[940px] relative cursor-grab active:cursor-grabbing z-10 transition-all duration-500" data-season="spring" style="left: 0; top: 0;">
+                <div class="perspective relative w-full aspect-[461/880] translate-y-2 lg:translate-y-4 4xl:translate-y-10 6xl:translate-y-16 -rotate-3 hover:scale-105 transition-transform duration-300 group drop-shadow-md">
+                    <div class="flip-card-inner transform-style-3d absolute inset-0 pointer-events-none">
+                        <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#fdf2f3] p-3 4xl:p-5 6xl:p-8">
+                            <div class="relative w-full h-full bg-white receipt-zigzag">
+                                <img src="hi/af.png" alt="Receipt Front" draggable="false" class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 transition-all pointer-events-auto">
                                 <div onclick="addMemory(event, '#fdf2f3', this, 'hi/af.png', 'hi/af1.jpeg')" class="absolute bottom-[2%] left-[5%] w-[25%] h-[12%] z-20 cursor-pointer pointer-events-auto"></div>
                                 <div onclick='showReceipt(event, "Spring Amusement Park", "spring", "innocence of childhood")' class="absolute bottom-[2%] right-[5%] w-[60%] h-[12%] z-20 cursor-pointer pointer-events-auto"></div>
-                    </div>
-                </div>
-                <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#fdf2f3] p-2 rotate-y-180">
-                    <div class="relative w-full h-full bg-[#1d1d1d] receipt-zigzag distort-container overflow-hidden pointer-events-auto">
-                        <img src="hi/ab.jpg" alt="Receipt Back Base" draggable="false" class="absolute inset-0 w-full h-full object-cover pointer-events-none">
-                        <div class="absolute inset-0 w-full h-full pointer-events-none circle-mask">
-                            <div class="w-full h-full pointer-events-none lens-wrapper">
-                                <img src="hi/ab.jpg" alt="Receipt Back Lens" draggable="false" class="absolute inset-0 w-full h-full object-cover lens-image">
+                            </div>
+                        </div>
+                        <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#fdf2f3] p-3 4xl:p-5 6xl:p-8 rotate-y-180">
+                            <div class="relative w-full h-full bg-[#1d1d1d] receipt-zigzag distort-container overflow-hidden pointer-events-auto">
+                                <img src="hi/ab.jpg" alt="Receipt Back Base" draggable="false" class="absolute inset-0 w-full h-full object-cover pointer-events-none">
+                                <div class="absolute inset-0 w-full h-full pointer-events-none circle-mask">
+                                    <div class="w-full h-full pointer-events-none lens-wrapper">
+                                        <img src="hi/ab.jpg" alt="Receipt Back Lens" draggable="false" class="absolute inset-0 w-full h-full object-cover lens-image">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            
         </div>
-    </div>
     </main>
 
     <div id="receiptModal" class="fixed inset-0 z-[200] hidden items-center justify-center bg-black/40 backdrop-blur-sm opacity-0 transition-opacity duration-300 pointer-events-auto" onclick="closeReceipt()">
-        <div id="receiptContent" class="receipt-zigzag bg-[#fcfaf2] py-12 px-8 md:px-10 max-w-sm w-[85%] text-black flex flex-col items-center transform scale-95 transition-transform duration-300 shadow-2xl relative" onclick="event.stopPropagation()">
-            <h2 id="receiptTitle" class="font-pixel text-[16px] md:text-[20px] font-bold mb-6 text-center capitalize tracking-widest leading-snug opacity-90">Blooming Excitement</h2>
-            <div class="w-full border-t-2 border-dashed border-black/30 mb-5"></div>
+        <div id="receiptContent" class="receipt-zigzag-large bg-[#fcfaf2] py-12 px-8 md:px-10 4xl:py-20 4xl:px-16 6xl:py-40 6xl:px-32 max-w-lg 4xl:max-w-3xl 6xl:max-w-[90rem] w-[85%] text-black flex flex-col items-center transform scale-95 transition-transform duration-300 shadow-2xl relative" onclick="event.stopPropagation()">
+            <h2 id="receiptTitle" class="font-pixel text-[18px] md:text-[24px] 4xl:text-[42px] 6xl:text-[90px] font-bold mb-6 4xl:mb-10 6xl:mb-20 text-center capitalize tracking-widest leading-snug opacity-90">Blooming Excitement</h2>
+            <div class="w-full border-t-[3px] 4xl:border-t-[5px] 6xl:border-t-[8px] border-dashed border-black/30 mb-5 4xl:mb-8 6xl:mb-16"></div>
             <div class="w-full flex justify-center">
-                <div class="space-y-1.5 font-bold flex flex-col items-start leading-relaxed opacity-80 text-left" style="font-size: 10px;">
-                    <div class="flex items-start gap-2">
-                        <span class="uppercase tracking-[0.25em] w-[48px] shrink-0">BRAND:</span>
+                <div class="space-y-1.5 4xl:space-y-3 6xl:space-y-6 font-bold flex flex-col items-start leading-relaxed opacity-80 text-left text-[12px] 4xl:text-[22px] 6xl:text-[48px]">
+                    <div class="flex items-start gap-2 4xl:gap-4 6xl:gap-10">
+                        <span class="uppercase tracking-[0.25em] w-[56px] 4xl:w-[110px] 6xl:w-[240px] shrink-0">BRAND:</span>
                         <span class="capitalize tracking-[0.2em]">Intangible Store</span>
                     </div>
-                    <div class="flex items-start gap-2">
-                        <span class="uppercase tracking-[0.25em] w-[48px] shrink-0">THEME:</span>
+                    <div class="flex items-start gap-2 4xl:gap-4 6xl:gap-10">
+                        <span class="uppercase tracking-[0.25em] w-[56px] 4xl:w-[110px] 6xl:w-[240px] shrink-0">THEME:</span>
                         <span id="receiptThemeVal" class="capitalize tracking-[0.2em]">Spring</span>
                     </div>
-                    <div class="flex items-start gap-2">
-                        <span class="uppercase tracking-[0.25em] w-[48px] shrink-0">PRICE:</span>
+                    <div class="flex items-start gap-2 4xl:gap-4 6xl:gap-10">
+                        <span class="uppercase tracking-[0.25em] w-[56px] 4xl:w-[110px] 6xl:w-[240px] shrink-0">PRICE:</span>
                         <span id="receiptPriceVal" class="capitalize tracking-[0.2em]">A Longing For Spring</span>
                     </div>
                 </div>
             </div>
-            <div class="w-full border-t-2 border-dashed border-black/30 mt-5 mb-6"></div>
-            <div class="text-center font-pixel font-bold text-[12px] leading-normal text-black/80 flex flex-col gap-1.5">
+            <div class="w-full border-t-[3px] 4xl:border-t-[5px] 6xl:border-t-[8px] border-dashed border-black/30 mt-5 4xl:mt-8 6xl:mt-20 mb-6 4xl:mb-10 6xl:mb-20"></div>
+            <div class="text-center font-pixel font-bold text-[14px] 4xl:text-[26px] 6xl:text-[60px] leading-normal text-black/80 flex flex-col gap-1.5 4xl:gap-3 6xl:gap-6 break-keep">
                 <p>무형의 상점은 흐릿해져가는<br>추억과 감정들을 일깨워주는 상점입니다.</p>
-                <p>이곳의 모든 상품은 이미 여러분의 추억으로<br>결제되어 있습니다!</p>
+                <p>이곳의 모든 상품은 이미 여러분의<br>추억으로 결제되어 있습니다!</p>
             </div>
-            <button onclick="closeReceipt()" class="font-pixel mt-8 px-6 py-2 border border-dashed border-black text-black text-[10px] font-bold uppercase tracking-widest hover:bg-black hover:text-white active:bg-black active:text-white transition-colors">BUY NOW</button>
+            <button onclick="closeReceipt()" class="font-pixel mt-8 4xl:mt-16 6xl:mt-32 px-6 py-2 4xl:px-12 4xl:py-5 6xl:px-32 6xl:py-12 border-[2px] 4xl:border-[4px] 6xl:border-[6px] border-dashed border-black text-black text-[12px] 4xl:text-[24px] 6xl:text-[56px] font-bold uppercase tracking-widest hover:bg-black hover:text-white active:bg-black active:text-white transition-colors">BUY NOW</button>
         </div>
     </div>
 
@@ -394,12 +453,26 @@
         function filterSeason(season, btnElement) {
             const allBtns = document.querySelectorAll('.filter-btn');
             allBtns.forEach(btn => {
-                btn.classList.remove('bg-black', 'text-white', 'shadow-lg');
+                btn.classList.remove('bg-black', 'text-white', 'text-black', 'shadow-lg');
+                btn.style.backgroundColor = '';
                 btn.classList.add('text-gray-400', 'hover:text-black');
             });
             
             btnElement.classList.remove('text-gray-400', 'hover:text-black');
-            btnElement.classList.add('bg-black', 'text-white', 'shadow-lg');
+            btnElement.classList.add('shadow-lg');
+
+            if (season === 'all') {
+                btnElement.classList.add('bg-black', 'text-white');
+            } else {
+                btnElement.classList.add('text-white');
+                const themeColors = {
+                    'spring': '#f9a8d4', // 하트의 pink-300 색상
+                    'summer': '#6ee7b7', // 하트의 emerald-300 색상
+                    'autumn': '#facc15', // 하트의 yellow-400 색상
+                    'winter': '#7dd3fc'  // 하트의 sky-300 색상
+                };
+                btnElement.style.backgroundColor = themeColors[season];
+            }
 
             const receipts = document.querySelectorAll('.draggable-wrapper');
             receipts.forEach(receipt => {
@@ -417,6 +490,7 @@
             const container = btn.parentElement;
             const img = container.querySelector('img');
             let toastText = '';
+            let isSpecialMilestone = false; // 에러 원인 해결!
 
             const wrapper = btn.closest('.draggable-wrapper');
             const season = wrapper ? wrapper.dataset.season : null;
@@ -424,9 +498,169 @@
             if (img.getAttribute('src') === originalSrc) {
                 img.setAttribute('src', filledSrc);
                 toastText = '기억 목록에 추가!';
-                if (season) memoryCounts[season]++;
+                if (season) {
+                    memoryCounts[season]++;
+                    if (memoryCounts[season] % 10 === 0) {
+                        isSpecialMilestone = true;
+                        toastText = `🎉 ${memoryCounts[season]}번째 기억 달성! 🎉`;
+                    }
+                    document.getElementById(`count-${season}`).innerText = `+${memoryCounts[season]}`; // 화면 즉시 업데이트
+                }
+                
+                // --- 💖 하트 날아가는 애니메이션 (파티클 효과) ---
+                const heartColors = {
+                    'spring': '#f9a8d4', // pink-300
+                    'summer': '#6ee7b7', // emerald-300
+                    'autumn': '#facc15', // yellow-400
+                    'winter': '#7dd3fc'
+                };
+                const hColor = season ? heartColors[season] : '#ffb3ba';
+                const scaleFactor = window.innerWidth >= 5000 ? 4 : (window.innerWidth >= 2400 ? 2.5 : (window.innerWidth >= 1024 ? 1.5 : 1));
+                const numHearts = 8 + Math.floor(Math.random() * 6);
+                
+                let clientX = event.clientX;
+                let clientY = event.clientY;
+                if (event.type.includes('touch') && event.touches && event.touches.length > 0) {
+                    clientX = event.touches[0].clientX;
+                    clientY = event.touches[0].clientY;
+                }
+
+                // --- 🎉 10번 단위 기념: 파스텔 꽃가루(Confetti) 폭발 효과 ---
+                if (isSpecialMilestone) {
+                    const confettiColors = ['#ffb3ba', '#ffdfba', '#ffffba', '#baffc9', '#bae1ff', '#e8baff']; // 파스텔 무지개 6색
+                    const numConfetti = 60 + Math.floor(Math.random() * 40); // 60~100개
+                    for (let i = 0; i < numConfetti; i++) {
+                        const confetti = document.createElement('div');
+                        confetti.className = 'fixed pointer-events-none z-[9998] shadow-sm';
+                        const size = (8 + Math.random() * 12) * scaleFactor;
+                        confetti.style.width = `${size}px`;
+                        confetti.style.height = `${size * (Math.random() > 0.5 ? 1 : 1.5)}px`; // 정사각형, 직사각형 섞기
+                        if (Math.random() > 0.5) confetti.style.borderRadius = '50%'; // 절반은 동그라미
+                        confetti.style.backgroundColor = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+                        confetti.style.left = `${clientX}px`;
+                        confetti.style.top = `${clientY}px`;
+                        
+                        const angle = Math.random() * Math.PI * 2;
+                        const distance = (150 + Math.random() * 450) * scaleFactor;
+                        const tx = Math.cos(angle) * distance;
+                        const ty = Math.sin(angle) * distance - (200 * scaleFactor); // 살짝 위로 솟구치도록
+                        const rot = (Math.random() - 0.5) * 1000;
+                        const duration = 1.5 + Math.random() * 1.5;
+                        
+                        confetti.style.transition = `transform ${duration}s cubic-bezier(0.25, 1, 0.5, 1), opacity ${duration}s ease-in`;
+                        confetti.style.transform = `translate(-50%, -50%) rotate(0deg)`;
+                        confetti.style.opacity = '1';
+                        
+                        document.body.appendChild(confetti);
+                        
+                        requestAnimationFrame(() => {
+                            requestAnimationFrame(() => {
+                                confetti.style.transform = `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) rotate(${rot}deg)`;
+                                confetti.style.opacity = '0';
+                            });
+                        });
+                        
+                        setTimeout(() => {
+                            if (document.body.contains(confetti)) confetti.remove();
+                        }, duration * 1000);
+                    }
+                }
+
+                for (let i = 0; i < numHearts; i++) {
+                    const heart = document.createElement('div');
+                    heart.innerHTML = '♥';
+                    heart.className = 'fixed pointer-events-none z-[9999] font-pixel drop-shadow-md';
+                    heart.style.left = `${clientX}px`;
+                    heart.style.top = `${clientY}px`;
+                    heart.style.color = hColor;
+                    
+                    const size = (20 + Math.random() * 30) * scaleFactor;
+                    heart.style.fontSize = `${size}px`;
+                    
+                    const tx = (Math.random() - 0.5) * 300 * scaleFactor;
+                    const ty = (-150 - Math.random() * 250) * scaleFactor;
+                    const rot = (Math.random() - 0.5) * 90;
+                    const duration = 0.8 + Math.random() * 0.6;
+                    
+                    heart.style.transition = `transform ${duration}s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity ${duration}s ease-out`;
+                    heart.style.transform = `translate(-50%, -50%) scale(0.5) rotate(0deg)`;
+                    heart.style.opacity = '1';
+                    
+                    document.body.appendChild(heart);
+                    
+                    requestAnimationFrame(() => {
+                        requestAnimationFrame(() => {
+                            heart.style.transform = `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) scale(${1 + Math.random() * 0.5}) rotate(${rot}deg)`;
+                            heart.style.opacity = '0';
+                        });
+                    });
+                    
+                    // 애니메이션 끝난 후 요소 삭제 (메모리 누수 방지)
+                    setTimeout(() => {
+                        if (document.body.contains(heart)) {
+                            heart.remove();
+                        }
+                    }, duration * 1000);
+                }
             } else {
                 img.setAttribute('src', originalSrc);
+
+                // --- 💔 하트 모이는 애니메이션 (리버스 파티클 효과) ---
+                // --- 💔 하트 모이는 애니메이션 ---
+                const heartColors = {
+                    'spring': '#f9a8d4', // pink-300
+                    'summer': '#6ee7b7', // emerald-300
+                    'autumn': '#facc15', // yellow-400
+                    'winter': '#7dd3fc'
+                };
+                const hColor = season ? heartColors[season] : '#ffb3ba';
+                const scaleFactor = window.innerWidth >= 5000 ? 4 : (window.innerWidth >= 2400 ? 2.5 : (window.innerWidth >= 1024 ? 1.5 : 1));
+                const numHearts = 8 + Math.floor(Math.random() * 5);
+                
+                let clientX = event.clientX;
+                let clientY = event.clientY;
+                if (event.type.includes('touch') && event.touches && event.touches.length > 0) {
+                    clientX = event.touches[0].clientX;
+                    clientY = event.touches[0].clientY;
+                }
+
+                for (let i = 0; i < numHearts; i++) {
+                    const heart = document.createElement('div');
+                    heart.innerHTML = '♥';
+                    heart.className = 'fixed pointer-events-none z-[9999] font-pixel drop-shadow-md';
+                    heart.style.left = `${clientX}px`;
+                    heart.style.top = `${clientY}px`;
+                    heart.style.color = hColor;
+                    
+                    const size = (15 + Math.random() * 25) * scaleFactor;
+                    heart.style.fontSize = `${size}px`;
+                    
+                    const tx = (Math.random() - 0.5) * 350 * scaleFactor;
+                    const ty = (-100 - Math.random() * 300) * scaleFactor;
+                    const rot = (Math.random() - 0.5) * 180;
+                    const duration = 0.4 + Math.random() * 0.4;
+                    
+                    // 1. 시작 상태: 바깥에 위치, 투명도 0
+                    heart.style.transform = `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) scale(1) rotate(${rot}deg)`;
+                    heart.style.opacity = '0';
+                    
+                    document.body.appendChild(heart);
+                    
+                    // 2. 브라우저가 애니메이션 시작을 확실히 인식하도록 강제 계산(Reflow)
+                    void heart.offsetWidth;
+                    
+                    // 3. 도착 상태: 클릭한 손가락 위치(중앙)로 모이면서 스케일 0
+                    heart.style.transition = `transform ${duration}s cubic-bezier(0.55, 0.085, 0.68, 0.53), opacity ${duration}s ease-in`;
+                    heart.style.transform = `translate(-50%, -50%) scale(0) rotate(0deg)`;
+                    heart.style.opacity = '1';
+                    
+                    // 4. 애니메이션 종료 후 DOM 제거
+                    setTimeout(() => {
+                        if (document.body.contains(heart)) {
+                            heart.remove();
+                        }
+                    }, duration * 1000);
+                }
             }
 
             if (toastText !== '') {
@@ -436,14 +670,17 @@
                 
                 const toast = document.createElement('div');
                 
-                toast.className = 'memory-toast fixed top-1/2 left-1/2 w-[280px] md:w-[320px] receipt-zigzag font-pixel text-black text-sm lg:text-base font-bold text-center py-5 shadow-2xl transform -translate-x-1/2 -translate-y-1/2 scale-95 opacity-0 transition-all duration-300 z-[100] pointer-events-none';
-                toast.style.backgroundColor = bgColor;
+                if (isSpecialMilestone) {
+                    // 특별한 달성 시: 파스텔톤 무지개빛 그라데이션 배경
+                    toast.className = 'memory-toast fixed top-1/2 left-1/2 w-[380px] md:w-[500px] 4xl:w-[850px] 6xl:w-[1400px] receipt-zigzag-large font-pixel text-black text-[22px] md:text-[30px] 4xl:text-[46px] 6xl:text-[72px] font-bold text-center py-12 md:py-16 4xl:py-28 6xl:py-40 shadow-[0_0_60px_rgba(255,180,200,0.4)] transform -translate-x-1/2 -translate-y-1/2 scale-95 opacity-0 transition-all duration-500 z-[100] pointer-events-none';
+                    toast.style.background = 'linear-gradient(135deg, #ffb3ba, #ffdfba, #ffffba, #baffc9, #bae1ff, #e8baff)';
+                } else {
+                    // 평소: 기본 단색 배경
+                    toast.className = 'memory-toast fixed top-1/2 left-1/2 w-[360px] md:w-[480px] 4xl:w-[750px] 6xl:w-[1200px] receipt-zigzag-large font-pixel text-black text-[24px] md:text-[32px] 4xl:text-[50px] 6xl:text-[76px] font-bold text-center py-10 md:py-12 4xl:py-20 6xl:py-32 shadow-2xl transform -translate-x-1/2 -translate-y-1/2 scale-95 opacity-0 transition-all duration-300 z-[100] pointer-events-none';
+                    toast.style.backgroundColor = bgColor;
+                }
                 toast.innerText = toastText;
                 
-                if (season) {
-                    document.getElementById(`count-${season}`).innerText = `+${memoryCounts[season]}`;
-                }
-
                 document.body.appendChild(toast);
                 
                 requestAnimationFrame(() => {
