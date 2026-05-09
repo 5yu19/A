@@ -236,7 +236,7 @@
                             <div class="relative w-full h-full bg-white receipt-zigzag">
                                 <img src="hi/sf.png" alt="Receipt Front" draggable="false" class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 transition-all pointer-events-auto">
                                 <div onclick="addMemory(event, '#d9ecfb', this, 'hi/sf.png', 'hi/sf1.jpeg')" class="absolute bottom-[2%] left-[5%] w-[25%] h-[12%] z-20 cursor-pointer pointer-events-auto"></div>
-                                <div onclick='showReceipt(event, "Snowman&#39;s Smile", "winter", "Red-Tipped Nose")' class="absolute bottom-[2%] right-[5%] w-[60%] h-[12%] z-20 cursor-pointer pointer-events-auto"></div>
+                                <div onclick='showReceipt(event, "Snowman&#39;s Smile", "winter", "Red-tipped Nose")' class="absolute bottom-[2%] right-[5%] w-[60%] h-[12%] z-20 cursor-pointer pointer-events-auto"></div>
                             </div>
                         </div>
                         <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#d9ecfb] p-3 4xl:p-5 6xl:p-8 rotate-y-180">
@@ -407,21 +407,21 @@
 
     <div id="receiptModal" class="fixed inset-0 z-[200] hidden items-center justify-center bg-black/40 backdrop-blur-sm opacity-0 transition-opacity duration-300 pointer-events-auto" onclick="closeReceipt()">
         <div id="receiptContent" class="receipt-zigzag-large bg-[#fcfaf2] py-12 px-8 md:px-10 4xl:py-20 4xl:px-16 6xl:py-40 6xl:px-32 max-w-lg 4xl:max-w-3xl 6xl:max-w-[90rem] w-[85%] text-black flex flex-col items-center transform scale-95 transition-transform duration-300 shadow-2xl relative" onclick="event.stopPropagation()">
-            <h2 id="receiptTitle" class="font-pixel text-[18px] md:text-[24px] 4xl:text-[42px] 6xl:text-[90px] font-bold mb-6 4xl:mb-10 6xl:mb-20 text-center capitalize tracking-widest leading-snug opacity-90">Blooming Excitement</h2>
+            <h2 id="receiptTitle" class="font-pixel text-[18px] md:text-[24px] 4xl:text-[42px] 6xl:text-[90px] font-bold mb-6 4xl:mb-10 6xl:mb-20 text-center uppercase tracking-widest leading-snug opacity-90">Blooming Excitement</h2>
             <div class="w-full border-t-[3px] 4xl:border-t-[5px] 6xl:border-t-[8px] border-dashed border-black/30 mb-5 4xl:mb-8 6xl:mb-16"></div>
             <div class="w-full flex justify-center">
                 <div class="space-y-1.5 4xl:space-y-3 6xl:space-y-6 font-bold flex flex-col items-start leading-relaxed opacity-80 text-left text-[12px] 4xl:text-[22px] 6xl:text-[48px]">
                     <div class="flex items-start gap-2 4xl:gap-4 6xl:gap-10">
                         <span class="uppercase tracking-[0.25em] w-[56px] 4xl:w-[110px] 6xl:w-[240px] shrink-0">BRAND:</span>
-                        <span class="capitalize tracking-[0.2em]">Intangible Store</span>
+                        <span class="uppercase tracking-[0.2em]">Intangible Store</span>
                     </div>
                     <div class="flex items-start gap-2 4xl:gap-4 6xl:gap-10">
                         <span class="uppercase tracking-[0.25em] w-[56px] 4xl:w-[110px] 6xl:w-[240px] shrink-0">THEME:</span>
-                        <span id="receiptThemeVal" class="capitalize tracking-[0.2em]">Spring</span>
+                        <span id="receiptThemeVal" class="uppercase tracking-[0.2em]">Spring</span>
                     </div>
                     <div class="flex items-start gap-2 4xl:gap-4 6xl:gap-10">
                         <span class="uppercase tracking-[0.25em] w-[56px] 4xl:w-[110px] 6xl:w-[240px] shrink-0">PRICE:</span>
-                        <span id="receiptPriceVal" class="capitalize tracking-[0.2em]">A Longing For Spring</span>
+                        <span id="receiptPriceVal" class="uppercase tracking-[0.2em]">A Longing For Spring</span>
                     </div>
                 </div>
             </div>
@@ -725,6 +725,7 @@
             const modal = document.getElementById('receiptModal');
             const content = document.getElementById('receiptContent');
             
+            // 계절별 테마 색상 지정
             const themeColors = {
                 'spring': '#fdf2f3',
                 'summer': '#d8f0e0',
