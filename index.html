@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Intangible Store</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&amp;display=swap" rel="stylesheet">
     <style>
         @font-face {
             font-family: 'NeoDunggeunmo';
@@ -93,12 +93,14 @@
             <div class="text-[11px] lg:text-[14px] tracking-[0.25em] font-bold uppercase opacity-80">
                 Intangible Store
             </div>
-            <button onclick="resetStore()" class="flex items-center justify-center p-1 hover:opacity-50 active:scale-95 transition-all" title="위치 초기화">
-                <svg class="w-3.5 h-3.5 lg:w-4 lg:h-4" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
-                    <path d="M3 3v5h5" />
-                </svg>
-            </button>
+            <div class="flex items-center gap-2">
+                <button onclick="resetStore()" class="flex items-center justify-center p-1 hover:opacity-50 active:scale-95 transition-all" title="위치 초기화">
+                    <svg class="w-3.5 h-3.5 lg:w-4 lg:h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+                        <path d="M3 3v5h5" />
+                    </svg>
+                </button>
+            </div>
 
             <div class="flex items-center gap-4 lg:gap-6 text-[10px] lg:text-[12px] font-pixel font-bold pt-1">
                 <div class="flex items-center gap-1.5" title="Spring"><span class="text-pink-300 text-sm">♥</span><span id="count-spring">+0</span></div>
@@ -147,11 +149,11 @@
                     </div>
                 </div>
                 <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#fdf2f3] p-2 rotate-y-180">
-                    <div class="relative w-full h-full bg-white receipt-zigzag distort-container overflow-hidden pointer-events-auto">
-                        <img src="hi/fb.jpeg" alt="Receipt Back Base" draggable="false" class="absolute inset-0 w-full h-full object-cover pointer-events-none">
+                    <div class="relative w-full h-full bg-[#1d1d1d] receipt-zigzag distort-container overflow-hidden pointer-events-auto">
+                        <img src="hi/fb.jpg" alt="Receipt Back Base" draggable="false" class="absolute inset-0 w-full h-full object-cover pointer-events-none">
                         <div class="absolute inset-0 w-full h-full pointer-events-none circle-mask">
                             <div class="w-full h-full pointer-events-none lens-wrapper">
-                                <img src="hi/fb.jpeg" alt="Receipt Back Lens" draggable="false" class="absolute inset-0 w-full h-full object-cover lens-image">
+                                <img src="hi/fb.jpg" alt="Receipt Back Lens" draggable="false" class="absolute inset-0 w-full h-full object-cover lens-image">
                             </div>
                         </div>
                     </div>
@@ -171,11 +173,11 @@
                     </div>
                 </div>
                 <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#d9ecfb] p-2 rotate-y-180">
-                    <div class="relative w-full h-full bg-white receipt-zigzag distort-container overflow-hidden pointer-events-auto">
-                        <img src="hi/sb.jpeg" alt="Receipt Back Base" draggable="false" class="absolute inset-0 w-full h-full object-cover pointer-events-none">
+                    <div class="relative w-full h-full bg-[#1d1d1d] receipt-zigzag distort-container overflow-hidden pointer-events-auto">
+                        <img src="hi/sb.jpg" alt="Receipt Back Base" draggable="false" class="absolute inset-0 w-full h-full object-cover pointer-events-none">
                         <div class="absolute inset-0 w-full h-full pointer-events-none circle-mask">
                             <div class="w-full h-full pointer-events-none lens-wrapper">
-                                <img src="hi/sb.jpeg" alt="Receipt Back Lens" draggable="false" class="absolute inset-0 w-full h-full object-cover lens-image">
+                                <img src="hi/sb.jpg" alt="Receipt Back Lens" draggable="false" class="absolute inset-0 w-full h-full object-cover lens-image">
                             </div>
                         </div>
                     </div>
@@ -195,11 +197,11 @@
                     </div>
                 </div>
                 <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#d8f0e0] p-2 rotate-y-180">
-                    <div class="relative w-full h-full bg-white receipt-zigzag distort-container overflow-hidden pointer-events-auto">
-                        <img src="hi/wb.jpeg" alt="Receipt Back Base" draggable="false" class="absolute inset-0 w-full h-full object-cover pointer-events-none">
+                    <div class="relative w-full h-full bg-[#1d1d1d] receipt-zigzag distort-container overflow-hidden pointer-events-auto">
+                        <img src="hi/wb.jpg" alt="Receipt Back Base" draggable="false" class="absolute inset-0 w-full h-full object-cover pointer-events-none">
                         <div class="absolute inset-0 w-full h-full pointer-events-none circle-mask">
                             <div class="w-full h-full pointer-events-none lens-wrapper">
-                                <img src="hi/wb.jpeg" alt="Receipt Back Lens" draggable="false" class="absolute inset-0 w-full h-full object-cover lens-image">
+                                <img src="hi/wb.jpg" alt="Receipt Back Lens" draggable="false" class="absolute inset-0 w-full h-full object-cover lens-image">
                             </div>
                         </div>
                     </div>
@@ -219,11 +221,11 @@
                     </div>
                 </div>
                 <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#FFEFD5] p-2 rotate-y-180">
-                    <div class="relative w-full h-full bg-white receipt-zigzag distort-container overflow-hidden pointer-events-auto">
-                        <img src="hi/bb.jpeg" alt="Receipt Back Base" draggable="false" class="absolute inset-0 w-full h-full object-cover pointer-events-none">
+                    <div class="relative w-full h-full bg-[#1d1d1d] receipt-zigzag distort-container overflow-hidden pointer-events-auto">
+                        <img src="hi/bb.jpg" alt="Receipt Back Base" draggable="false" class="absolute inset-0 w-full h-full object-cover pointer-events-none">
                         <div class="absolute inset-0 w-full h-full pointer-events-none circle-mask">
                             <div class="w-full h-full pointer-events-none lens-wrapper">
-                                <img src="hi/bb.jpeg" alt="Receipt Back Lens" draggable="false" class="absolute inset-0 w-full h-full object-cover lens-image">
+                                <img src="hi/bb.jpg" alt="Receipt Back Lens" draggable="false" class="absolute inset-0 w-full h-full object-cover lens-image">
                             </div>
                         </div>
                     </div>
@@ -243,11 +245,11 @@
                     </div>
                 </div>
                 <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#d9ecfb] p-2 rotate-y-180">
-                    <div class="relative w-full h-full bg-white receipt-zigzag distort-container overflow-hidden pointer-events-auto">
-                        <img src="hi/cb.jpeg" alt="Receipt Back Base" draggable="false" class="absolute inset-0 w-full h-full object-cover pointer-events-none">
+                    <div class="relative w-full h-full bg-[#1d1d1d] receipt-zigzag distort-container overflow-hidden pointer-events-auto">
+                        <img src="hi/cb.jpg" alt="Receipt Back Base" draggable="false" class="absolute inset-0 w-full h-full object-cover pointer-events-none">
                         <div class="absolute inset-0 w-full h-full pointer-events-none circle-mask">
                             <div class="w-full h-full pointer-events-none lens-wrapper">
-                                <img src="hi/cb.jpeg" alt="Receipt Back Lens" draggable="false" class="absolute inset-0 w-full h-full object-cover lens-image">
+                                <img src="hi/cb.jpg" alt="Receipt Back Lens" draggable="false" class="absolute inset-0 w-full h-full object-cover lens-image">
                             </div>
                         </div>
                     </div>
@@ -267,11 +269,11 @@
                     </div>
                 </div>
                 <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#d8f0e0] p-2 rotate-y-180">
-                    <div class="relative w-full h-full bg-white receipt-zigzag distort-container overflow-hidden pointer-events-auto">
-                        <img src="hi/rb.jpeg" alt="Receipt Back Base" draggable="false" class="absolute inset-0 w-full h-full object-cover pointer-events-none">
+                    <div class="relative w-full h-full bg-[#1d1d1d] receipt-zigzag distort-container overflow-hidden pointer-events-auto">
+                        <img src="hi/rb.jpg" alt="Receipt Back Base" draggable="false" class="absolute inset-0 w-full h-full object-cover pointer-events-none">
                         <div class="absolute inset-0 w-full h-full pointer-events-none circle-mask">
                             <div class="w-full h-full pointer-events-none lens-wrapper">
-                                <img src="hi/rb.jpeg" alt="Receipt Back Lens" draggable="false" class="absolute inset-0 w-full h-full object-cover lens-image">
+                                <img src="hi/rb.jpg" alt="Receipt Back Lens" draggable="false" class="absolute inset-0 w-full h-full object-cover lens-image">
                             </div>
                         </div>
                     </div>
@@ -291,7 +293,7 @@
                     </div>
                 </div>
                 <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#FFEFD5] p-2 rotate-y-180">
-                    <div class="relative w-full h-full bg-white receipt-zigzag distort-container overflow-hidden pointer-events-auto">
+                    <div class="relative w-full h-full bg-[#1d1d1d] receipt-zigzag distort-container overflow-hidden pointer-events-auto">
                         <img src="hi/lb.jpg" alt="Receipt Back Base" draggable="false" class="absolute inset-0 w-full h-full object-cover pointer-events-none">
                         <div class="absolute inset-0 w-full h-full pointer-events-none circle-mask">
                             <div class="w-full h-full pointer-events-none lens-wrapper">
@@ -315,44 +317,46 @@
                     </div>
                 </div>
                 <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#fdf2f3] p-2 rotate-y-180">
-                    <div class="relative w-full h-full bg-white receipt-zigzag distort-container overflow-hidden pointer-events-auto">
-                        <img src="hi/ab.jpeg" alt="Receipt Back Base" draggable="false" class="absolute inset-0 w-full h-full object-cover pointer-events-none">
+                    <div class="relative w-full h-full bg-[#1d1d1d] receipt-zigzag distort-container overflow-hidden pointer-events-auto">
+                        <img src="hi/ab.jpg" alt="Receipt Back Base" draggable="false" class="absolute inset-0 w-full h-full object-cover pointer-events-none">
                         <div class="absolute inset-0 w-full h-full pointer-events-none circle-mask">
                             <div class="w-full h-full pointer-events-none lens-wrapper">
-                                <img src="hi/ab.jpeg" alt="Receipt Back Lens" draggable="false" class="absolute inset-0 w-full h-full object-cover lens-image">
-                            </div>
+                                <img src="hi/ab.jpg" alt="Receipt Back Lens" draggable="false" class="absolute inset-0 w-full h-full object-cover lens-image">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </main>
 
     <div id="receiptModal" class="fixed inset-0 z-[200] hidden items-center justify-center bg-black/40 backdrop-blur-sm opacity-0 transition-opacity duration-300 pointer-events-auto" onclick="closeReceipt()">
         <div id="receiptContent" class="receipt-zigzag bg-[#fcfaf2] py-12 px-8 md:px-10 max-w-sm w-[85%] text-black flex flex-col items-center transform scale-95 transition-transform duration-300 shadow-2xl relative" onclick="event.stopPropagation()">
             <h2 id="receiptTitle" class="font-pixel text-[16px] md:text-[20px] font-bold mb-6 text-center capitalize tracking-widest leading-snug opacity-90">Blooming Excitement</h2>
             <div class="w-full border-t-2 border-dashed border-black/30 mb-5"></div>
-            <div class="w-full space-y-1.5 font-bold flex flex-col items-start leading-relaxed opacity-80">
-                <div class="flex items-baseline gap-2">
-                    <span class="uppercase text-[12px] md:text-[14px] tracking-[0.25em]">BRAND:</span>
-                    <span class="capitalize text-[11px] md:text-[13px] tracking-[0.2em]">Intangible Store</span>
-                </div>
-                <div class="flex items-baseline gap-2">
-                    <span class="uppercase text-[12px] md:text-[14px] tracking-[0.25em]">THEME:</span>
-                    <span id="receiptThemeVal" class="capitalize text-[11px] md:text-[13px] tracking-[0.2em]">Spring</span>
-                </div>
-                <div class="flex items-baseline gap-2">
-                    <span class="uppercase text-[12px] md:text-[14px] tracking-[0.25em]">PRICE:</span>
-                    <span id="receiptPriceVal" class="capitalize text-[11px] md:text-[13px] tracking-[0.2em]">A Longing For Spring</span>
+            <div class="w-full flex justify-center">
+                <div class="space-y-1.5 font-bold flex flex-col items-start leading-relaxed opacity-80 text-left" style="font-size: 10px;">
+                    <div class="flex items-start gap-2">
+                        <span class="uppercase tracking-[0.25em] w-[48px] shrink-0">BRAND:</span>
+                        <span class="capitalize tracking-[0.2em]">Intangible Store</span>
+                    </div>
+                    <div class="flex items-start gap-2">
+                        <span class="uppercase tracking-[0.25em] w-[48px] shrink-0">THEME:</span>
+                        <span id="receiptThemeVal" class="capitalize tracking-[0.2em]">Spring</span>
+                    </div>
+                    <div class="flex items-start gap-2">
+                        <span class="uppercase tracking-[0.25em] w-[48px] shrink-0">PRICE:</span>
+                        <span id="receiptPriceVal" class="capitalize tracking-[0.2em]">A Longing For Spring</span>
+                    </div>
                 </div>
             </div>
             <div class="w-full border-t-2 border-dashed border-black/30 mt-5 mb-6"></div>
-            <div class="text-center font-pixel font-bold text-[10px] md:text-[12px] leading-normal text-black/80 flex flex-col gap-1.5">
+            <div class="text-center font-pixel font-bold text-[12px] leading-normal text-black/80 flex flex-col gap-1.5">
                 <p>무형의 상점은 흐릿해져가는<br>추억과 감정들을 일깨워주는 상점입니다.</p>
                 <p>이곳의 모든 상품은 이미 여러분의 추억으로<br>결제되어 있습니다!</p>
             </div>
-            <button onclick="closeReceipt()" class="font-pixel mt-8 px-6 py-2 border border-dashed border-black text-black text-[10px] font-bold uppercase tracking-widest hover:bg-black hover:text-white transition-colors">Close</button>
+            <button onclick="closeReceipt()" class="font-pixel mt-8 px-6 py-2 border border-dashed border-black text-black text-[10px] font-bold uppercase tracking-widest hover:bg-black hover:text-white active:bg-black active:text-white transition-colors">BUY NOW</button>
         </div>
     </div>
 
@@ -423,39 +427,40 @@
                 if (season) memoryCounts[season]++;
             } else {
                 img.setAttribute('src', originalSrc);
-                toastText = '기억 목록에서 삭제!';
             }
 
-            // --- 토스트 메시지 관련 로직 ---
-            const existingToast = document.querySelector('.memory-toast');
-            if (existingToast) existingToast.remove();
-            
-            const toast = document.createElement('div');
-            
-            toast.className = 'memory-toast fixed top-1/2 left-1/2 w-[280px] md:w-[320px] receipt-zigzag font-pixel text-black text-sm lg:text-base font-bold text-center py-5 shadow-2xl transform -translate-x-1/2 -translate-y-1/2 scale-95 opacity-0 transition-all duration-300 z-[100] pointer-events-none';
-            toast.style.backgroundColor = bgColor;
-            toast.innerText = toastText;
-            
-            if (season) {
-                document.getElementById(`count-${season}`).innerText = `+${memoryCounts[season]}`;
-            }
+            if (toastText !== '') {
+                // --- 토스트 메시지 관련 로직 ---
+                const existingToast = document.querySelector('.memory-toast');
+                if (existingToast) existingToast.remove();
+                
+                const toast = document.createElement('div');
+                
+                toast.className = 'memory-toast fixed top-1/2 left-1/2 w-[280px] md:w-[320px] receipt-zigzag font-pixel text-black text-sm lg:text-base font-bold text-center py-5 shadow-2xl transform -translate-x-1/2 -translate-y-1/2 scale-95 opacity-0 transition-all duration-300 z-[100] pointer-events-none';
+                toast.style.backgroundColor = bgColor;
+                toast.innerText = toastText;
+                
+                if (season) {
+                    document.getElementById(`count-${season}`).innerText = `+${memoryCounts[season]}`;
+                }
 
-            document.body.appendChild(toast);
-            
-            requestAnimationFrame(() => {
-                toast.classList.remove('scale-95', 'opacity-0');
-                toast.classList.add('scale-100');
-            });
-            
-            setTimeout(() => {
-                toast.classList.add('scale-95', 'opacity-0');
-                toast.classList.remove('scale-100');
+                document.body.appendChild(toast);
+                
+                requestAnimationFrame(() => {
+                    toast.classList.remove('scale-95', 'opacity-0');
+                    toast.classList.add('scale-100');
+                });
+                
                 setTimeout(() => {
-                    if (document.body.contains(toast)) {
-                        toast.remove();
-                    }
-                }, 300);
-            }, 2000);
+                    toast.classList.add('scale-95', 'opacity-0');
+                    toast.classList.remove('scale-100');
+                    setTimeout(() => {
+                        if (document.body.contains(toast)) {
+                            toast.remove();
+                        }
+                    }, 300);
+                }, 2000);
+            }
         }
 
         function showReceipt(event, title, theme, price) {
@@ -468,6 +473,15 @@
             const modal = document.getElementById('receiptModal');
             const content = document.getElementById('receiptContent');
             
+            // 계절별 테마 색상 지정
+            const themeColors = {
+                'spring': '#fdf2f3',
+                'summer': '#d8f0e0',
+                'autumn': '#FFEFD5',
+                'winter': '#d9ecfb'
+            };
+            content.style.setProperty('background-color', themeColors[theme] || '#fcfaf2', 'important');
+
             modal.classList.remove('hidden');
             modal.classList.add('flex');
             
