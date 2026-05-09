@@ -88,24 +88,32 @@
 
         .receipt-zigzag {
             -webkit-mask: 
-                conic-gradient(from -45deg at bottom, transparent, #000 1deg 89deg, transparent 90deg) 50% 100% / var(--zz-size-w) var(--zz-size-h) repeat-x,
-                conic-gradient(from 135deg at top, transparent, #000 1deg 89deg, transparent 90deg) 50% 0 / var(--zz-size-w) var(--zz-size-h) repeat-x,
-                linear-gradient(#000 0 0) 50% var(--zz-size-h) / 100% calc(100% - var(--zz-size-h2)) no-repeat;
+                conic-gradient(from -45deg at bottom, #000 0 90deg, transparent 0) 50% 100% / var(--zz-size-w) var(--zz-size-h) repeat-x,
+                conic-gradient(from 135deg at top, #000 0 90deg, transparent 0) 50% 0 / var(--zz-size-w) var(--zz-size-h) repeat-x,
+                linear-gradient(#000 0 0) 50% 50% / 100% calc(100% - var(--zz-size-h2) + 2px) no-repeat;
             mask: 
-                conic-gradient(from -45deg at bottom, transparent, #000 1deg 89deg, transparent 90deg) 50% 100% / var(--zz-size-w) var(--zz-size-h) repeat-x,
-                conic-gradient(from 135deg at top, transparent, #000 1deg 89deg, transparent 90deg) 50% 0 / var(--zz-size-w) var(--zz-size-h) repeat-x,
-                linear-gradient(#000 0 0) 50% var(--zz-size-h) / 100% calc(100% - var(--zz-size-h2)) no-repeat;
+                conic-gradient(from -45deg at bottom, #000 0 90deg, transparent 0) 50% 100% / var(--zz-size-w) var(--zz-size-h) repeat-x,
+                conic-gradient(from 135deg at top, #000 0 90deg, transparent 0) 50% 0 / var(--zz-size-w) var(--zz-size-h) repeat-x,
+                linear-gradient(#000 0 0) 50% 50% / 100% calc(100% - var(--zz-size-h2) + 2px) no-repeat;
         }
 
         .receipt-zigzag-large {
             -webkit-mask: 
-                conic-gradient(from -45deg at bottom, transparent, #000 1deg 89deg, transparent 90deg) 50% 100% / var(--zz-large-w) var(--zz-large-h) repeat-x,
-                conic-gradient(from 135deg at top, transparent, #000 1deg 89deg, transparent 90deg) 50% 0 / var(--zz-large-w) var(--zz-large-h) repeat-x,
-                linear-gradient(#000 0 0) 50% var(--zz-large-h) / 100% calc(100% - var(--zz-large-h2)) no-repeat;
+                conic-gradient(from -45deg at bottom, #000 0 90deg, transparent 0) 50% 100% / var(--zz-large-w) var(--zz-large-h) repeat-x,
+                conic-gradient(from 135deg at top, #000 0 90deg, transparent 0) 50% 0 / var(--zz-large-w) var(--zz-large-h) repeat-x,
+                linear-gradient(#000 0 0) 50% 50% / 100% calc(100% - var(--zz-large-h2) + 2px) no-repeat;
             mask: 
-                conic-gradient(from -45deg at bottom, transparent, #000 1deg 89deg, transparent 90deg) 50% 100% / var(--zz-large-w) var(--zz-large-h) repeat-x,
-                conic-gradient(from 135deg at top, transparent, #000 1deg 89deg, transparent 90deg) 50% 0 / var(--zz-large-w) var(--zz-large-h) repeat-x,
-                linear-gradient(#000 0 0) 50% var(--zz-large-h) / 100% calc(100% - var(--zz-large-h2)) no-repeat;
+                conic-gradient(from -45deg at bottom, #000 0 90deg, transparent 0) 50% 100% / var(--zz-large-w) var(--zz-large-h) repeat-x,
+                conic-gradient(from 135deg at top, #000 0 90deg, transparent 0) 50% 0 / var(--zz-large-w) var(--zz-large-h) repeat-x,
+                linear-gradient(#000 0 0) 50% 50% / 100% calc(100% - var(--zz-large-h2) + 2px) no-repeat;
+        }
+
+        /* 브라우저 그림자 렌더링 버그 차단: 제안해주신 대로 틈새를 완전히 배경색으로 채웁니다! */
+        .perspective.drop-shadow-md {
+            filter: none !important;
+        }
+        .perspective .backface-hidden {
+            filter: drop-shadow(0 4px 3px rgba(0,0,0,0.07)) drop-shadow(0 2px 2px rgba(0,0,0,0.06));
         }
 
         .circle-mask {
@@ -195,8 +203,9 @@
 
         <div class="relative z-40 w-full max-w-[1920px] 2xl:max-w-[2200px] 3xl:max-w-[2600px] 4xl:max-w-[3600px] 6xl:max-w-[5000px] mx-auto grid grid-cols-2 xl:grid-cols-4 place-items-center gap-x-6 xl:gap-x-12 2xl:gap-x-20 4xl:gap-x-24 6xl:gap-x-48 gap-y-12 xl:gap-y-24 4xl:gap-y-24 6xl:gap-y-32 px-4 sm:px-8 xl:px-16 4xl:px-24 6xl:px-48 mt-8 xl:mt-16 4xl:mt-12 6xl:mt-20">
 
+            <!-- 1번째 카드 (봄 꽃): 아래로 내려서 타이틀과 안 겹치게 -->
             <div class="draggable-wrapper w-full max-w-[230px] sm:max-w-[280px] xl:max-w-[330px] 2xl:max-w-[400px] 3xl:max-w-[480px] 4xl:max-w-[680px] 6xl:max-w-[940px] relative cursor-grab active:cursor-grabbing z-10 transition-all duration-500" data-season="spring" style="left: 0; top: 0;">
-                <div class="perspective relative w-full aspect-[461/880] translate-y-4 lg:translate-y-8 4xl:translate-y-16 6xl:translate-y-24 rotate-2 hover:scale-105 transition-transform duration-300 group drop-shadow-md">
+                <div class="perspective relative w-full aspect-[461/880] translate-y-6 lg:translate-y-10 4xl:translate-y-16 6xl:translate-y-24 -rotate-3 hover:scale-105 transition-transform duration-300 group drop-shadow-md">
                     <div class="flip-card-inner transform-style-3d absolute inset-0 pointer-events-none">
                         <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#fdf2f3] p-3 4xl:p-5 6xl:p-8">
                             <div class="relative w-full h-full bg-white receipt-zigzag">
@@ -219,8 +228,9 @@
                 </div>
             </div>
 
+            <!-- 2번째 카드 (겨울 눈사람): 살짝 위로 올림 -->
             <div class="draggable-wrapper w-full max-w-[230px] sm:max-w-[280px] xl:max-w-[330px] 2xl:max-w-[400px] 3xl:max-w-[480px] 4xl:max-w-[680px] 6xl:max-w-[940px] relative cursor-grab active:cursor-grabbing z-10 transition-all duration-500" data-season="winter" style="left: 0; top: 0;">
-                <div class="perspective relative w-full aspect-[461/880] -translate-y-6 lg:-translate-y-12 4xl:-translate-y-16 6xl:-translate-y-24 -rotate-3 hover:scale-105 transition-transform duration-300 group drop-shadow-md">
+                <div class="perspective relative w-full aspect-[461/880] -translate-y-4 lg:-translate-y-8 4xl:-translate-y-12 6xl:-translate-y-16 rotate-2 hover:scale-105 transition-transform duration-300 group drop-shadow-md">
                     <div class="flip-card-inner transform-style-3d absolute inset-0 pointer-events-none">
                         <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#d9ecfb] p-3 4xl:p-5 6xl:p-8">
                             <div class="relative w-full h-full bg-white receipt-zigzag">
@@ -244,7 +254,7 @@
             </div>
 
             <div class="draggable-wrapper w-full max-w-[230px] sm:max-w-[280px] xl:max-w-[330px] 2xl:max-w-[400px] 3xl:max-w-[480px] 4xl:max-w-[680px] 6xl:max-w-[940px] relative cursor-grab active:cursor-grabbing z-10 transition-all duration-500" data-season="summer" style="left: 0; top: 0;">
-                <div class="perspective relative w-full aspect-[461/880] translate-y-2 lg:translate-y-4 4xl:translate-y-8 6xl:translate-y-16 rotate-1 hover:scale-105 transition-transform duration-300 group drop-shadow-md">
+                <div class="perspective relative w-full aspect-[461/880] translate-y-4 lg:translate-y-8 4xl:translate-y-12 6xl:translate-y-20 rotate-1 hover:scale-105 transition-transform duration-300 group drop-shadow-md">
                     <div class="flip-card-inner transform-style-3d absolute inset-0 pointer-events-none">
                         <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#d8f0e0] p-3 4xl:p-5 6xl:p-8">
                             <div class="relative w-full h-full bg-white receipt-zigzag">
@@ -267,8 +277,9 @@
                 </div>
             </div>
 
+            <!-- 4번째 카드 (가을 버스): 적당히 올림 -->
             <div class="draggable-wrapper w-full max-w-[230px] sm:max-w-[280px] xl:max-w-[330px] 2xl:max-w-[400px] 3xl:max-w-[480px] 4xl:max-w-[680px] 6xl:max-w-[940px] relative cursor-grab active:cursor-grabbing z-10 transition-all duration-500" data-season="autumn" style="left: 0; top: 0;">
-                <div class="perspective relative w-full aspect-[461/880] translate-y-4 lg:translate-y-8 4xl:translate-y-16 6xl:translate-y-24 rotate-2 hover:scale-105 transition-transform duration-300 group drop-shadow-md">
+                <div class="perspective relative w-full aspect-[461/880] -translate-y-8 lg:-translate-y-12 4xl:-translate-y-20 6xl:-translate-y-24 -rotate-2 hover:scale-105 transition-transform duration-300 group drop-shadow-md">
                     <div class="flip-card-inner transform-style-3d absolute inset-0 pointer-events-none">
                         <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#FFEFD5] p-3 4xl:p-5 6xl:p-8">
                             <div class="relative w-full h-full bg-white receipt-zigzag">
@@ -291,8 +302,9 @@
                 </div>
             </div>
 
+            <!-- 5번째 카드 (겨울 트리): 살짝 아래로 내려서 1번과 겹치지 않게 -->
             <div class="draggable-wrapper w-full max-w-[230px] sm:max-w-[280px] xl:max-w-[330px] 2xl:max-w-[400px] 3xl:max-w-[480px] 4xl:max-w-[680px] 6xl:max-w-[940px] relative cursor-grab active:cursor-grabbing z-10 transition-all duration-500" data-season="winter" style="left: 0; top: 0;">
-                <div class="perspective relative w-full aspect-[461/880] -translate-y-2 lg:-translate-y-4 4xl:-translate-y-12 6xl:-translate-y-20 rotate-3 hover:scale-105 transition-transform duration-300 group drop-shadow-md">
+                <div class="perspective relative w-full aspect-[461/880] translate-y-2 lg:translate-y-4 4xl:translate-y-6 6xl:translate-y-10 rotate-3 hover:scale-105 transition-transform duration-300 group drop-shadow-md">
                     <div class="flip-card-inner transform-style-3d absolute inset-0 pointer-events-none">
                         <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#d9ecfb] p-3 4xl:p-5 6xl:p-8">
                             <div class="relative w-full h-full bg-white receipt-zigzag">
@@ -315,8 +327,9 @@
                 </div>
             </div>
 
+            <!-- 6번째 카드 (여름 우산): 살짝 위로 올려서 2번과 어우러지게 -->
             <div class="draggable-wrapper w-full max-w-[230px] sm:max-w-[280px] xl:max-w-[330px] 2xl:max-w-[400px] 3xl:max-w-[480px] 4xl:max-w-[680px] 6xl:max-w-[940px] relative cursor-grab active:cursor-grabbing z-10 transition-all duration-500" data-season="summer" style="left: 0; top: 0;">
-                <div class="perspective relative w-full aspect-[461/880] -translate-y-12 lg:-translate-y-20 4xl:-translate-y-24 6xl:-translate-y-40 -rotate-1 hover:scale-105 transition-transform duration-300 group drop-shadow-md">
+                <div class="perspective relative w-full aspect-[461/880] -translate-y-6 lg:-translate-y-10 4xl:-translate-y-16 6xl:-translate-y-24 -rotate-1 hover:scale-105 transition-transform duration-300 group drop-shadow-md">
                     <div class="flip-card-inner transform-style-3d absolute inset-0 pointer-events-none">
                         <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#d8f0e0] p-3 4xl:p-5 6xl:p-8">
                             <div class="relative w-full h-full bg-white receipt-zigzag">
@@ -339,8 +352,9 @@
                 </div>
             </div>
 
+            <!-- 7번째 카드 (가을 낙엽): 아래로 내려서 3번과 겹치지 않게 -->
             <div class="draggable-wrapper w-full max-w-[230px] sm:max-w-[280px] xl:max-w-[330px] 2xl:max-w-[400px] 3xl:max-w-[480px] 4xl:max-w-[680px] 6xl:max-w-[940px] relative cursor-grab active:cursor-grabbing z-10 transition-all duration-500" data-season="autumn" style="left: 0; top: 0;">
-                <div class="perspective relative w-full aspect-[461/880] -translate-y-2 lg:-translate-y-4 4xl:-translate-y-10 6xl:-translate-y-16 rotate-2 hover:scale-105 transition-transform duration-300 group drop-shadow-md">
+                <div class="perspective relative w-full aspect-[461/880] translate-y-4 lg:translate-y-8 4xl:translate-y-12 6xl:translate-y-16 rotate-2 hover:scale-105 transition-transform duration-300 group drop-shadow-md">
                     <div class="flip-card-inner transform-style-3d absolute inset-0 pointer-events-none">
                         <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#FFEFD5] p-3 4xl:p-5 6xl:p-8">
                             <div class="relative w-full h-full bg-white receipt-zigzag">
@@ -363,8 +377,9 @@
                 </div>
             </div>
 
+            <!-- 8번째 카드 (봄 놀이공원): 아래로 내려서 4번과 겹치지 않게 -->
             <div class="draggable-wrapper w-full max-w-[230px] sm:max-w-[280px] xl:max-w-[330px] 2xl:max-w-[400px] 3xl:max-w-[480px] 4xl:max-w-[680px] 6xl:max-w-[940px] relative cursor-grab active:cursor-grabbing z-10 transition-all duration-500" data-season="spring" style="left: 0; top: 0;">
-                <div class="perspective relative w-full aspect-[461/880] translate-y-2 lg:translate-y-4 4xl:translate-y-10 6xl:translate-y-16 -rotate-3 hover:scale-105 transition-transform duration-300 group drop-shadow-md">
+                <div class="perspective relative w-full aspect-[461/880] -translate-y-10 lg:-translate-y-16 4xl:-translate-y-24 6xl:-translate-y-40 -rotate-3 hover:scale-105 transition-transform duration-300 group drop-shadow-md">
                     <div class="flip-card-inner transform-style-3d absolute inset-0 pointer-events-none">
                         <div class="backface-hidden absolute inset-0 receipt-zigzag bg-[#fdf2f3] p-3 4xl:p-5 6xl:p-8">
                             <div class="relative w-full h-full bg-white receipt-zigzag">
@@ -710,7 +725,6 @@
             const modal = document.getElementById('receiptModal');
             const content = document.getElementById('receiptContent');
             
-            // 계절별 테마 색상 지정
             const themeColors = {
                 'spring': '#fdf2f3',
                 'summer': '#d8f0e0',
